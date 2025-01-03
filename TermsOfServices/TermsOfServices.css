@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Container {
+    background-color: #F5F5DC;
+    height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    color: #3C2F2F;
+}
+
+.title {
+    font-family: "Bocklin";
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.box {
+    margin-left: 8%;
+    margin-right: 8%;
+    padding-top: 2%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.boxTitle {
+    color: #184A45;
+    font-family: "Bocklin";
+    font-size: 1.2rem;
+}
+
+.head {
+    position: absolute;
+    top: 2%;
+    left: 5%;
+    display: flex;
+    align-items: center;
+    gap: 2%;
+}
+
+.head p {
+    font-size: 11px;
+}
+
+.logo {
+    border-radius: 50%;
+    width: 70px;
+}
+
+.cgu:hover {
+    color: #184A45;
+    font-weight: bold;
+}
+
+.footer {
+    margin-top: 5%;
+}
+
+.FooterContent {
+    color: #3C2F2F;
+    display: flex;
+    flex-direction: column;
+}
+
+.footerTitle {
+    margin: auto;
+    font-size: 5rem;
+    padding: 50px 200px;
+    font-family: "Bocklin";
+}
+
+.condition {
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #184A45;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.condition a:hover {
+    font-weight: bold;
+}
+
+.Copyright {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-transform: uppercase;
+    background-color: #3C2F2F;
+    color: #F5F5DC;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    padding: 1%;
+    margin-top: 2%;
+}
