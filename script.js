@@ -1,5 +1,5 @@
 // CAROUSSEL HERO AUTO
-var _a, _b;
+var _a;
 var images = [
     'ressources/images/AC/Elise/elisebal5.jpg',
     'ressources/images/hobbit/hobbit2.jpg',
@@ -160,35 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
     handleResize();
 });
 // FORMULAIRE CONTACT
-(_a = document.getElementById('contactForm')) === null || _a === void 0 ? void 0 : _a.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var form = this;
-    var formData = new FormData(form);
-    fetch('', {
-        method: 'POST',
-        body: formData
-    })
-        .then(function (response) { return response.json(); })
-        .then(function (data) {
-        try {
-            if (data.status === "success") {
-                alert(data.message);
-                form.reset();
-                var fileNameSpan = document.querySelector('.fileName');
-                if (fileNameSpan) {
-                    fileNameSpan.textContent = '';
-                }
-            }
-            else {
-                alert(data.message);
-            }
-        }
-        catch (e) {
-            console.log('Error:', data);
-        }
-    });
-});
-(_b = document.getElementById('file')) === null || _b === void 0 ? void 0 : _b.addEventListener('change', function () {
+(_a = document.getElementById('file')) === null || _a === void 0 ? void 0 : _a.addEventListener('change', function () {
     var fileName = document.querySelector('.fileName');
     if (fileName && this.files && this.files[0]) {
         fileName.textContent = this.files[0].name;

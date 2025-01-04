@@ -313,6 +313,21 @@
     font-size: 12px;
 }
 
+/*    A L E R T   B O X    */
+
+.message {
+    position: absolute;
+    top: 10%;
+    right: 30%;
+    padding: 1%;
+    background-color: #F5F5DC;
+    color: #184A45;
+    font-family: Calibri;
+    border-radius: 15px;
+}
+
+
+
 /*    H E R O    */
 
 .heroSection {

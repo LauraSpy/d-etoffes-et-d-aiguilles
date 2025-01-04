@@ -199,27 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // FORMULAIRE CONTACT
-
-document.addEventListener('DOMContentLoaded', () => {
-    const messageContainer = document.getElementById('messageContainer');
-
-    if (messageContainer) {
-        const message = <?php 
-        echo isset($_SESSION['message']) ? json_encode($_SESSION['message']) : 'null';
-        unset($_SESSION['message']); // Effacer le message après l'avoir affiché
-      ?>;
-
-        if (message) {
-            if (message.status === 'success') {
-                messageContainer.innerHTML = `<p class="success-message">${message.text}</p>`;
-            } else {
-                messageContainer.innerHTML = `<p class="error-message">${message.text}</p>`;
-            }
-        }
-    }
-});
-
-
 document.getElementById('file')?.addEventListener('change', function (this: HTMLInputElement) {
     const fileName = document.querySelector('.fileName');
     if (fileName && this.files && this.files[0]) {

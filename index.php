@@ -1,52 +1,57 @@
 <?php
-require_once 'config.php';
 
-$alerte = '';
-if (isset($_POST['submit'])) {
+if (isset($_POST['mailform'])) {
+
     $nom = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
-    
-    $to = CLIENT_EMAIL;
-    $subject = "Nouveau message reçu depuis le site";
-    $contenu = "Nom: $nom\n";
-    $contenu .= "Email: $email\n\n";
-    $contenu .= "Message:\n$message\n\n";
 
-    // Gestion du fichier uploadé
-    if(isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
-        $filename = $_FILES['file']['name'];
-        $filetype = $_FILES['file']['type'];
-        $filesize = $_FILES['file']['size'];
-        $filetmp = $_FILES['file']['tmp_name'];
+    if(!empty($nom) AND !empty($email) AND !empty($message))
+	{
+        $header="MIME-Version: 1.0\r\n";
+		$header.='From:"D\'étoffes et d\'Aiguilles"<ne-pas-repondre@support.fr>'."\n";
+		$header.='Content-Type:text/html; charset="uft-8"'."\n";
+		$header.='Content-Transfer-Encoding: 8bit';
 
-        // Vérification de la taille du fichier (exemple : limite à 5 Mo)
-        if($filesize > 5000000) {
-            echo json_encode(["status" => "error", "message" => "Le fichier est trop volumineux."]);
-            exit;
+		$message='
+		<html>
+			<body>
+				<div align="center">
+					<u>Nom de l\'expéditeur :</u>'.$nom.'<br />
+					<u>Mail de l\'expéditeur :</u>'.$email.'<br />
+					<br />
+					'.nl2br($message).'
+				</div>
+			</body>
+		</html>
+		';
+
+        // Gestion du fichier uploadé
+        if(isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
+            $filename = $_FILES['file']['name'];
+            $filetype = $_FILES['file']['type'];
+            $filesize = $_FILES['file']['size'];
+            $filetmp = $_FILES['file']['tmp_name'];
+
+            // Déplacer le fichier uploadé vers un dossier permanent
+            $upload_dir = "./uploads/";
+            $upload_file = $upload_dir . basename($filename);
+            if(move_uploaded_file($filetmp, $upload_file)) {
+                $contenu .= "Fichier joint: $filename\n";
+                $contenu .= "Lien vers le fichier: d-etoffes-et-d-aiguilles.fr/$upload_file\n";
+            } else {
+                echo json_encode(["status" => "error", "message" => "Erreur lors du téléchargement du fichier."]);
+                exit;
+            }
         }
 
-        // Déplacer le fichier uploadé vers un dossier permanent
-        $upload_dir = "./uploads/";
-        $upload_file = $upload_dir . basename($filename);
-        if(move_uploaded_file($filetmp, $upload_file)) {
-            $contenu .= "Fichier joint: $filename\n";
-            $contenu .= "Lien vers le fichier: d-etoffes-et-d-aiguilles.fr/$upload_file\n";
-        } else {
-            echo json_encode(["status" => "error", "message" => "Erreur lors du téléchargement du fichier."]);
-            exit;
-        }
-    }
-
-    if (/* si l'envoi est réussi */) {
-        $_SESSION['message'] = ['status' => 'success', 'text' => 'Votre message a été envoyé avec succès.'];
-    } else {
-        $_SESSION['message'] = ['status' => 'error', 'text' => 'Une erreur s\'est produite lors de l\'envoi du message.'];
-    }
-
-    // Rediriger vers la même page pour éviter la resoumission du formulaire
-    header('Location: ' . $_SERVER['PHP_SELF'] . '#contact');
-    exit;    
+		mail("email-destinataire@example.org", "CONTACT - d-etoffes-et-d-aiguilles.fr", $message, $header);
+		$msg="Votre message a bien été envoyé !";
+	}
+	else
+	{
+		$msg="Tous les champs doivent être complétés !";
+	}
 }
 ?>
 
@@ -239,7 +244,6 @@ if (isset($_POST['submit'])) {
                 CONTACT<br />ME
             </div>
             <div>
-                <div id="alertMessage" class="alertMessage"></div>
                 <div>
                     <form id="contactForm" class="contactForm" name="contact" method="POST" action="" enctype="multipart/form-data">
                         <div class="formGroup">
@@ -260,9 +264,17 @@ if (isset($_POST['submit'])) {
                                 Choisir un fichier
                             </label>
                             <span class="fileName"></span>
-                            <button type="submit" class="submitButton">Envoyer</button>
+                            <button type="submit" class="submitButton" name="mailform">Envoyer</button>
                         </div>
                     </form>
+                    <div class="message">
+                        <?php
+                            if(isset($msg))
+                            {
+                                echo $msg;
+                            }
+                        ?>
+                    </div>
                 </div>
                 <div class="ContactLogo">
                     <div class="logo">
