@@ -1,7 +1,8 @@
 <?php
 require_once 'config.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$alerte = '';
+if (isset($_POST['submit'])) {
     $nom = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
@@ -21,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Vérification de la taille du fichier (exemple : limite à 5 Mo)
         if($filesize > 5000000) {
-            echo "Le fichier est trop volumineux.";
+            echo json_encode(["status" => "error", "message" => "Le fichier est trop volumineux."]);
             exit;
         }
 
@@ -30,20 +31,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $upload_file = $upload_dir . basename($filename);
         if(move_uploaded_file($filetmp, $upload_file)) {
             $contenu .= "Fichier joint: $filename\n";
-            $contenu .= "Lien vers le fichier: d-etoffes-et-d-aiguilles.fr/$upload_file\n"; //ajout l'url du site final
+            $contenu .= "Lien vers le fichier: d-etoffes-et-d-aiguilles.fr/$upload_file\n";
         } else {
-            echo "Erreur lors du téléchargement du fichier.";
+            echo json_encode(["status" => "error", "message" => "Erreur lors du téléchargement du fichier."]);
+            exit;
         }
-        exit;
     }
 
-    $headers = "From: $email";
-    
-    if (mail($to, $subject, $contenu, $headers)) {
-        echo json_encode(["status" => "success", "message" => "Votre message a été envoyé avec succès."]);
+    if (/* si l'envoi est réussi */) {
+        $_SESSION['message'] = ['status' => 'success', 'text' => 'Votre message a été envoyé avec succès.'];
     } else {
-        echo json_encode(["status" => "error", "message" => "Une erreur s'est produite lors de l'envoi du message."]);
-    }    
+        $_SESSION['message'] = ['status' => 'error', 'text' => 'Une erreur s\'est produite lors de l\'envoi du message.'];
+    }
+
+    // Rediriger vers la même page pour éviter la resoumission du formulaire
+    header('Location: ' . $_SERVER['PHP_SELF'] . '#contact');
+    exit;    
 }
 ?>
 
@@ -236,6 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 CONTACT<br />ME
             </div>
             <div>
+                <div id="alertMessage" class="alertMessage"></div>
                 <div>
                     <form id="contactForm" class="contactForm" name="contact" method="POST" action="" enctype="multipart/form-data">
                         <div class="formGroup">

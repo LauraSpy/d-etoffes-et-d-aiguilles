@@ -162,23 +162,30 @@ document.addEventListener('DOMContentLoaded', function () {
 // FORMULAIRE CONTACT
 (_a = document.getElementById('contactForm')) === null || _a === void 0 ? void 0 : _a.addEventListener('submit', function (e) {
     e.preventDefault();
-    var formData = new FormData(this);
+    var form = this;
+    var formData = new FormData(form);
     fetch('', {
         method: 'POST',
         body: formData
     })
         .then(function (response) { return response.json(); })
         .then(function (data) {
-        if (data.status === "success") {
-            alert(data.message);
+        try {
+            if (data.status === "success") {
+                alert(data.message);
+                form.reset();
+                var fileNameSpan = document.querySelector('.fileName');
+                if (fileNameSpan) {
+                    fileNameSpan.textContent = '';
+                }
+            }
+            else {
+                alert(data.message);
+            }
         }
-        else {
-            alert(data.message);
+        catch (e) {
+            console.log('Error:', data);
         }
-    })
-        .catch(function (error) {
-        console.error('Error:', error);
-        alert("Une erreur s'est produite lors de l'envoi du message. ERROR");
     });
 });
 (_b = document.getElementById('file')) === null || _b === void 0 ? void 0 : _b.addEventListener('change', function () {

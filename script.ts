@@ -200,26 +200,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // FORMULAIRE CONTACT
 
-document.getElementById('contactForm')?.addEventListener('submit', function (e: Event) {
-    e.preventDefault();
-    const formData = new FormData(this as HTMLFormElement);
+document.addEventListener('DOMContentLoaded', () => {
+    const messageContainer = document.getElementById('messageContainer');
 
-    fetch('', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === "success") {
-                alert(data.message);
+    if (messageContainer) {
+        const message = <?php 
+        echo isset($_SESSION['message']) ? json_encode($_SESSION['message']) : 'null';
+        unset($_SESSION['message']); // Effacer le message après l'avoir affiché
+      ?>;
+
+        if (message) {
+            if (message.status === 'success') {
+                messageContainer.innerHTML = `<p class="success-message">${message.text}</p>`;
             } else {
-                alert(data.message);
+                messageContainer.innerHTML = `<p class="error-message">${message.text}</p>`;
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert("Une erreur s'est produite lors de l'envoi du message. ERROR");
-        });
+        }
+    }
 });
 
 
