@@ -83,7 +83,7 @@ if (isset($_POST['mailform'])) {
         <header class="Header">
             <nav>
                 <div class="Container">
-                    <a href="./homepage.html" class="logo">
+                    <a href="./index.php" class="logo">
                         <img src="ressources/logo/logo_dark_full.jpg" alt="Logo">
                     </a>
                     <button class="menuButton" aria-controls="navbar" aria-expanded="false">
@@ -110,6 +110,7 @@ if (isset($_POST['mailform'])) {
         <section class="heroSection">
             <div class="heroBackground">
                 <div class="blurredBackground"></div>
+                <h1 style="display: none;">D'étoffes et d'Aiguilles</h1>
                 <img src="ressources/logo/logo_fond_noir_transp.png" alt="logo site" class="logoSite" />
                 <button class="scrollButton">
                     Scroll Down
