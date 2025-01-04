@@ -196,3 +196,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial call to set correct state
     handleResize();
 });
+
+
+// FORMULAIRE CONTACT
+
+document.getElementById('contactForm')?.addEventListener('submit', function (e: Event) {
+    e.preventDefault();
+    const formData = new FormData(this as HTMLFormElement);
+
+    fetch('', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert(data.message);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Une erreur s'est produite lors de l'envoi du message. ERROR");
+        });
+});
+
+
+document.getElementById('file')?.addEventListener('change', function (this: HTMLInputElement) {
+    const fileName = document.querySelector('.fileName');
+    if (fileName && this.files && this.files[0]) {
+        fileName.textContent = this.files[0].name;
+    }
+});

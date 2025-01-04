@@ -1,4 +1,5 @@
 // CAROUSSEL HERO AUTO
+var _a, _b;
 var images = [
     'ressources/images/AC/Elise/elisebal5.jpg',
     'ressources/images/hobbit/hobbit2.jpg',
@@ -132,3 +133,57 @@ function updateCarousel() {
 }
 document.addEventListener('DOMContentLoaded', initCarousel);
 window.addEventListener('resize', updateCarousel);
+// MENU BURGER
+document.addEventListener('DOMContentLoaded', function () {
+    var menuButton = document.querySelector('.menuButton');
+    var navbar = document.querySelector('.Navbar');
+    function toggleMenu() {
+        var isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', (!isExpanded).toString());
+        navbar.classList.toggle('open');
+    }
+    function handleResize() {
+        if (window.innerWidth > 800) {
+            navbar.classList.remove('open');
+            menuButton.setAttribute('aria-expanded', 'false');
+            menuButton.style.display = 'none';
+            navbar.style.display = 'block';
+        }
+        else {
+            menuButton.style.display = 'block';
+            navbar.style.display = navbar.classList.contains('open') ? 'block' : 'none';
+        }
+    }
+    menuButton.addEventListener('click', toggleMenu);
+    window.addEventListener('resize', handleResize);
+    // Initial call to set correct state
+    handleResize();
+});
+// FORMULAIRE CONTACT
+(_a = document.getElementById('contactForm')) === null || _a === void 0 ? void 0 : _a.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    fetch('', {
+        method: 'POST',
+        body: formData
+    })
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+        if (data.status === "success") {
+            alert(data.message);
+        }
+        else {
+            alert(data.message);
+        }
+    })
+        .catch(function (error) {
+        console.error('Error:', error);
+        alert("Une erreur s'est produite lors de l'envoi du message. ERROR");
+    });
+});
+(_b = document.getElementById('file')) === null || _b === void 0 ? void 0 : _b.addEventListener('change', function () {
+    var fileName = document.querySelector('.fileName');
+    if (fileName && this.files && this.files[0]) {
+        fileName.textContent = this.files[0].name;
+    }
+});
