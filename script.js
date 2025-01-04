@@ -166,3 +166,24 @@ document.addEventListener('DOMContentLoaded', function () {
         fileName.textContent = this.files[0].name;
     }
 });
+// MESSAGE ALERTE (disparaît au bout de 5s)
+document.addEventListener('DOMContentLoaded', function () {
+    var alertMessage = document.querySelector('.message');
+    if (alertMessage && alertMessage.textContent.trim() !== '') {
+        // Afficher le message avec une opacité de 1
+        alertMessage.style.opacity = '1';
+        alertMessage.style.transition = 'opacity 0.5s ease-in-out';
+        alertMessage.style.display = 'block';
+        setTimeout(function () {
+            // Faire disparaître le message en réduisant son opacité
+            alertMessage.style.opacity = '0';
+            // Cacher complètement le message après la transition
+            setTimeout(function () {
+                alertMessage.style.display = 'none';
+            }, 500); // Correspond à la durée de la transition
+        }, 5000); // Le message disparaîtra après 5 secondes (5000 ms)
+    }
+    else if (alertMessage) {
+        alertMessage.style.display = 'none';
+    }
+});

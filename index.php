@@ -8,44 +8,56 @@ if (isset($_POST['mailform'])) {
 
     if(!empty($nom) AND !empty($email) AND !empty($message))
 	{
-        $header="MIME-Version: 1.0\r\n";
-		$header.='From:"D\'étoffes et d\'Aiguilles"<ne-pas-repondre@support.fr>'."\n";
-		$header.='Content-Type:text/html; charset="uft-8"'."\n";
-		$header.='Content-Transfer-Encoding: 8bit';
+        // To
+        $to = 'admin@d-etoffes-et-d-aiguilles.fr';
 
-		$message='
-		<html>
-			<body>
-				<div align="center">
-					<u>Nom de l\'expéditeur :</u>'.$nom.'<br />
-					<u>Mail de l\'expéditeur :</u>'.$email.'<br />
-					<br />
-					'.nl2br($message).'
-				</div>
-			</body>
-		</html>
-		';
+        // Subject
+        $subject = "CONTACT - d-etoffes-et-d-aiguilles.fr";
+        
+        // clé aléatoire de limite
+        $boundary = md5(uniqid(microtime(), TRUE));
+
+        $header ="MIME-Version: 1.0\r\n";
+		$header .='From:"D\'Etoffes et d\'Aiguilles"<admin@d-etoffes-et-d-aiguilles.fr>'."\n";
+		$header .= 'Content-Type: multipart/mixed;boundary='.$boundary."\r\n";
+        $header .= "\r\n";
+
+        // Message HTML
+        $message .= '--'.$boundary."\r\n";
+        $message .= 'Content-type: text/html; charset=utf-8'."\r\n\r\n";
+		$message .='
+            <div align="center">
+                <u>Nom de l\'expéditeur :</u>'. $nom .'<br />
+                <u>Mail de l\'expéditeur :</u>'. $email .'<br />
+                <br />
+                '.nl2br($message).'
+            </div>
+		'."\r\n";
 
         // Gestion du fichier uploadé
         if(isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
             $filename = $_FILES['file']['name'];
             $filetype = $_FILES['file']['type'];
             $filesize = $_FILES['file']['size'];
-            $filetmp = $_FILES['file']['tmp_name'];
+            $tmp_name = $_FILES['file']['tmp_name'];
 
-            // Déplacer le fichier uploadé vers un dossier permanent
-            $upload_dir = "./uploads/";
-            $upload_file = $upload_dir . basename($filename);
-            if(move_uploaded_file($filetmp, $upload_file)) {
-                $contenu .= "Fichier joint: $filename\n";
-                $contenu .= "Lien vers le fichier: d-etoffes-et-d-aiguilles.fr/$upload_file\n";
-            } else {
-                echo json_encode(["status" => "error", "message" => "Erreur lors du téléchargement du fichier."]);
-                exit;
-            }
+            $handle = fopen($tmp_name, 'r') or die('File '.$filename.'can t be open');
+            $content = fread($handle, $filesize);
+            $content = chunk_split(base64_encode($content));
+            $f = fclose($handle);
+         
+            $message .= '--'.$boundary."\r\n";
+            $message .= 'Content-Type: '.$filetype.'; name="'.$filename.'"'."\r\n";
+            $message .= 'Content-Disposition: attachment; filename="'.$filename.'"'."\r\n";
+            $message .= 'Content-Transfer-Encoding: base64'."\r\n\r\n";
+            $message .= $content."\r\n";
         }
 
-		mail("email-destinataire@example.org", "CONTACT - d-etoffes-et-d-aiguilles.fr", $message, $header);
+        // Fin
+        $message .= '--'.$boundary."\r\n";
+
+        // Fonction mail
+		mail($to, $subject, $message, $header);
 		$msg="Votre message a bien été envoyé !";
 	}
 	else
