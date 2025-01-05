@@ -4,9 +4,9 @@ if (isset($_POST['mailform'])) {
 
     $nom = $_POST['name'];
     $email = $_POST['email'];
-    $message = $_POST['message'];
+    $user_message = $_POST['message'];
 
-    if(!empty($nom) AND !empty($email) AND !empty($message))
+    if(!empty($nom) AND !empty($email) AND !empty($user_message))
 	{
         // To
         $to = 'admin@d-etoffes-et-d-aiguilles.fr';
@@ -23,14 +23,14 @@ if (isset($_POST['mailform'])) {
         $header .= "\r\n";
 
         // Message HTML
-        $message .= '--'.$boundary."\r\n";
-        $message .= 'Content-type: text/html; charset=utf-8'."\r\n\r\n";
-		$message .='
+        $email_body .= '--'.$boundary."\r\n";
+        $email_body .= 'Content-type: text/html; charset=utf-8'."\r\n\r\n";
+		$email_body .='
             <div align="center">
                 <u>Nom de l\'expéditeur :</u>'. $nom .'<br />
                 <u>Mail de l\'expéditeur :</u>'. $email .'<br />
                 <br />
-                '.nl2br($message).'
+                '.nl2br($user_message).'
             </div>
 		'."\r\n";
 
@@ -46,18 +46,18 @@ if (isset($_POST['mailform'])) {
             $content = chunk_split(base64_encode($content));
             $f = fclose($handle);
          
-            $message .= '--'.$boundary."\r\n";
-            $message .= 'Content-Type: '.$filetype.'; name="'.$filename.'"'."\r\n";
-            $message .= 'Content-Disposition: attachment; filename="'.$filename.'"'."\r\n";
-            $message .= 'Content-Transfer-Encoding: base64'."\r\n\r\n";
-            $message .= $content."\r\n";
+            $email_body .= '--'.$boundary."\r\n";
+            $email_body .= 'Content-Type: '.$filetype.'; name="'.$filename.'"'."\r\n";
+            $email_body .= 'Content-Disposition: attachment; filename="'.$filename.'"'."\r\n";
+            $email_body .= 'Content-Transfer-Encoding: base64'."\r\n\r\n";
+            $$email_body .= $content."\r\n";
         }
 
         // Fin
         $message .= '--'.$boundary."\r\n";
 
         // Fonction mail
-		mail($to, $subject, $message, $header);
+		mail($to, $subject, $email_body, $header);
 		$msg="Votre message a bien été envoyé !";
 	}
 	else
