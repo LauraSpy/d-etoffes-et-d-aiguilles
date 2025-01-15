@@ -24,8 +24,8 @@ var carouselItems = [
     },
     {
         image: "/ressources/images/Cr\u00E9ation/robeBlanche.jpg",
-        title: "Robe Blanche, type robe de nuit",
-        description: "Façon Dame Blanche, robe type médiéval, robe de nuit, taille unique"
+        title: "Robe de chambre victorienne",
+        description: "Type de robe style Crimson Peak, historique, taille unique"
     },
     {
         image: "/ressources/images/Ciri/ciri_4.jpg",
@@ -34,8 +34,8 @@ var carouselItems = [
     },
     {
         image: "/ressources/images/Cr\u00E9ation/robemedieval.jpg",
-        title: "Robe type médiévale",
-        description: "Description"
+        title: "Robe style médiévale",
+        description: "Inspirée de l'univers de The Witcher, style médiéval fantasy, Haut et jupe séparable, Taille XS"
     },
     {
         image: "/ressources/images/Cr\u00E9ation/robeHisto.jpg",
@@ -44,28 +44,28 @@ var carouselItems = [
     },
     {
         image: "/ressources/images/AC/Elise/eliseFull.jpg",
-        title: "Robe de bal, Elise de la Serre, The Witcher",
-        description: "Redesign de la robe de bal du personnage d'Elise de la Serre dans The Witcher, corrigé pour être historiquement correct"
+        title: "Robe 18ème, entre la polonaise et l'anglaise",
+        description: "Inspiré de la robe de bal d'Elise de la Serre dans Assassin's Creed Unity, Robe à la polonaise mixé à l'Anglaise pour la longueur, et à la Française pour la pièce d'Estomac"
     },
     {
         image: "/ressources/images/Cr\u00E9ation/elfe.jpg",
         title: "Elfe de la forêt",
-        description: "Création d'un costume en cuir pour une elfe guerrière de la forêt"
+        description: "Tenue originale d'une tunique en lin avec veste et brassards en simili, taille XS"
     },
     {
         image: "/ressources/images/Cr\u00E9ation/sorciere.jpg",
         title: "Sorcière",
-        description: "Création orginal d'une sorcière"
+        description: "Tenue originale d'une sorcière, avec son bâton lumineux, taille XS"
     },
     {
         image: "/ressources/images/Cr\u00E9ation/jedi.jpg",
-        title: "Jedi",
-        description: "Création et design d'un costume de jedi, univers Star Wars"
+        title: "Costume de Jedi",
+        description: "Tenue et création d'une tenue de Jedi, inspiré des tenues de Star Wars, taille XS à S"
     },
     {
         image: "/ressources/images/Cr\u00E9ation/sith.jpg",
-        title: "Sith",
-        description: "Création d'un costume inspiré des Sith, univers Star Wars"
+        title: "Tenue de Seigneur Sith",
+        description: "Tenue originale d'un Sith de l'univers Star Wars, Taille sur mesure, et pièces d'armure en mousse avec leds intégrées"
     }
 ];
 var currentIndex = 0;
