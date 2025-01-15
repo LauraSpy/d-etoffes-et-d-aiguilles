@@ -1,43 +1,4 @@
-// CAROUSSEL HERO AUTO
-
-const images: string[] = [
-    'ressources/images/AC/Elise/elisebal5.jpg',
-    'ressources/images/hobbit/hobbit2.jpg',
-    'ressources/images/Ciri/Ciri_4.jpg',
-    'ressources/images/Création/robeHisto.jpg',
-    'ressources/images/Yennefer/yenn3-2.jpg'
-];
-
-let currentImageIndex: number = 0;
-let loadedImages: string[] = [];
-
-function preloadImages(): Promise<string[]> {
-    const promises = images.map((image) => {
-        return new Promise<string>((resolve) => {
-            const img = new Image();
-            img.src = image;
-            img.onload = () => resolve(image);
-        });
-    });
-
-    return Promise.all(promises);
-}
-
-function updateBackgroundImage(): void {
-    const background = document.querySelector('.blurredBackground') as HTMLElement;
-    if (background && loadedImages.length > 0) {
-        background.style.backgroundImage = `url(${loadedImages[currentImageIndex]})`;
-        currentImageIndex = (currentImageIndex + 1) % loadedImages.length;
-    }
-}
-
 function initHero(): void {
-    preloadImages().then((results) => {
-        loadedImages = results;
-        updateBackgroundImage();
-        setInterval(updateBackgroundImage, 4000);
-    });
-
     const scrollButton = document.querySelector('.scrollButton');
     if (scrollButton) {
         scrollButton.addEventListener('click', () => {
@@ -176,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
         menuButton.setAttribute('aria-expanded', (!isExpanded).toString());
         navbar.classList.toggle('open');
+        console.log('Menu toggled, open:', navbar.classList.contains('open'));
     }
 
     function handleResize(): void {

@@ -1,37 +1,5 @@
-// CAROUSSEL HERO AUTO
 var _a;
-var images = [
-    'ressources/images/AC/Elise/elisebal5.jpg',
-    'ressources/images/hobbit/hobbit2.jpg',
-    'ressources/images/Ciri/Ciri_4.jpg',
-    'ressources/images/Création/robeHisto.jpg',
-    'ressources/images/Yennefer/yenn3-2.jpg'
-];
-var currentImageIndex = 0;
-var loadedImages = [];
-function preloadImages() {
-    var promises = images.map(function (image) {
-        return new Promise(function (resolve) {
-            var img = new Image();
-            img.src = image;
-            img.onload = function () { return resolve(image); };
-        });
-    });
-    return Promise.all(promises);
-}
-function updateBackgroundImage() {
-    var background = document.querySelector('.blurredBackground');
-    if (background && loadedImages.length > 0) {
-        background.style.backgroundImage = "url(".concat(loadedImages[currentImageIndex], ")");
-        currentImageIndex = (currentImageIndex + 1) % loadedImages.length;
-    }
-}
 function initHero() {
-    preloadImages().then(function (results) {
-        loadedImages = results;
-        updateBackgroundImage();
-        setInterval(updateBackgroundImage, 4000);
-    });
     var scrollButton = document.querySelector('.scrollButton');
     if (scrollButton) {
         scrollButton.addEventListener('click', function () {
@@ -141,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
         menuButton.setAttribute('aria-expanded', (!isExpanded).toString());
         navbar.classList.toggle('open');
+        console.log('Menu toggled, open:', navbar.classList.contains('open'));
     }
     function handleResize() {
         if (window.innerWidth > 800) {

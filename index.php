@@ -188,7 +188,7 @@ if (isset($_POST['mailform'])) {
         </section>
 
         <section class="presentation" id="presentation">
-            <div class="presentationImage" style="background-image: url('./ressources/images/portrait/portrait.jpg');">
+            <div class="presentationImage" style="background-image: url('./ressources/images/background/portrait.jpg');">
             </div>
             <div class="presentationBox">
                 <h2 class="presentationBoxTitle">Qui Suis-je ?</h2>
@@ -252,8 +252,8 @@ if (isset($_POST['mailform'])) {
 
         <section class="contact" id="contact">
             <div class="contactBackground"
-                style="background-image: url('./ressources/images/AC/Elise/elise_reding_dark.jpg');"></div>
-            <div class="contactTitle animate-title">
+                style="background-image: url('./ressources/images/background/machine_a_coudre.jpg');"></div>
+            <div class="contactTitle">
                 CONTACT<br />ME
             </div>
             <div>
@@ -276,8 +276,9 @@ if (isset($_POST['mailform'])) {
                             <label for="file" class="customFileUpload">
                                 Choisir un fichier
                             </label>
-                            <span class="fileName"></span>
                             <button type="submit" class="submitButton" name="mailform">Envoyer</button>
+                            <br>
+                            <span class="fileName"></span>
                         </div>
                     </form>
                     <div class="message">
