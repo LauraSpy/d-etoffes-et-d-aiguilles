@@ -84,6 +84,7 @@ let currentIndex = 0;
 
 function initCarousel(): void {
     const carouselTrack = document.getElementById('carouselTrack');
+    const carouselContainer = document.getElementById('carouselContainer');
     if (carouselTrack) {
         carouselItems.forEach((item, index) => {
             const itemElement = document.createElement('div');
@@ -99,8 +100,44 @@ function initCarousel(): void {
         });
     }
 
-    document.querySelector('.navButtonLeft')?.addEventListener('click', handlePrev);
-    document.querySelector('.navButtonRight')?.addEventListener('click', handleNext);
+    const leftButton = document.querySelector('.navButtonLeft');
+    const rightButton = document.querySelector('.navButtonRight');
+
+    if (leftButton && rightButton) {
+        leftButton.addEventListener('click', handlePrev);
+        rightButton.addEventListener('click', handleNext);
+    }
+
+    // Gestion du comportement en fonction de la taille de l'écran
+    function handleResize() {
+        if (window.innerWidth <= 1050) {
+            if (carouselContainer) {
+                carouselContainer.style.overflowX = 'auto';
+            }
+            if (carouselTrack) {
+                carouselTrack.style.transform = 'none';
+            }
+        } else {
+            if (carouselContainer) {
+                carouselContainer.style.overflowX = 'hidden';
+            }
+            updateCarousel();
+        }
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Appel initial pour configurer le bon état
+}
+
+function updateCarousel(): void {
+    if (window.innerWidth > 1050) {
+        const carouselTrack = document.getElementById('carouselTrack');
+        const imageContainer = document.querySelector('.imageContainer') as HTMLElement;
+        if (carouselTrack && imageContainer) {
+            const containerWidth = imageContainer.offsetWidth;
+            carouselTrack.style.transform = `translateX(-${currentIndex * containerWidth}px)`;
+        }
+    }
 }
 
 function handleNext(): void {
@@ -111,15 +148,6 @@ function handleNext(): void {
 function handlePrev(): void {
     currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
     updateCarousel();
-}
-
-function updateCarousel(): void {
-    const carouselTrack = document.getElementById('carouselTrack');
-    const imageContainer = document.querySelector('.imageContainer') as HTMLElement;
-    if (carouselTrack && imageContainer) {
-        const containerWidth = imageContainer.offsetWidth;
-        carouselTrack.style.transform = `translateX(-${currentIndex * containerWidth}px)`;
-    }
 }
 
 document.addEventListener('DOMContentLoaded', initCarousel);
@@ -141,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleResize(): void {
-        if (window.innerWidth > 800) {
+        if (window.innerWidth > 1050) {
             navbar.classList.remove('open');
             menuButton.setAttribute('aria-expanded', 'false');
             menuButton.style.display = 'none';
@@ -152,12 +180,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function closeMenuOnScroll(): void {
+        if (window.innerWidth <= 1050 && navbar.classList.contains('open')) {
+            navbar.classList.remove('open');
+            menuButton.setAttribute('aria-expanded', 'false');
+            navbar.style.display = 'none';
+        }
+    }
+
+    function handleScroll(): void {
+        const header = document.querySelector('.Header');
+        if (window.scrollY > 50) {
+            header.classList.add('fullOpacity');
+        } else {
+            header.classList.remove('fullOpacity');
+        }
+    }
+
     menuButton.addEventListener('click', toggleMenu);
     window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', () => {
+        closeMenuOnScroll();
+        handleScroll();
+    });
 
     // Initial call to set correct state
     handleResize();
+    handleScroll();
 });
+
 
 
 // FORMULAIRE CONTACT

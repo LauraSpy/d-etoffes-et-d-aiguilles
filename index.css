@@ -64,17 +64,6 @@
     margin-right: 5%;
 }
 
-.presentationBoxText {
-    height: 35vh;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    padding: 5%;
-    font-family: Calibri;
-    scrollbar-color: #3c2f2f81;
-    scrollbar-color: #184a4575 transparent;
-    scrollbar-width: thin;
-}
-
 .quoteText {
     font-family: 'Nightingale';
     color: rgba(245, 245, 220, 1);
@@ -149,7 +138,7 @@
     height: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -160,22 +149,12 @@
     color: #3C2F2F;
     padding: 5%;
     margin-bottom: 5%;
-    margin-top: -10%;
 }
 
 .number {
-    padding-top: 5%;
-    padding-right: 8%;
-    padding-bottom: 10%;
-    padding-left: 10%;
     color: #3C2F2F;
-    transform: translate(-150%, -20%);
     font-family: "Bocklin";
     font-size: 60px;
-}
-
-.spe {
-    transform: translate(-180%, -18%);
 }
 
 .download {
@@ -247,23 +226,35 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 150px;
     background-color: #F5F5DC;
 }
 
 .presentationImage {
-    width: 400px;
-    height: 600px;
+    width: 600px;
+    height: 800px;
     background-size: cover;
     background-position: center;
     box-shadow: 10px 10px 5px 0px rgba(29, 29, 29, 0.4) inset;
 }
 
-.presentationBox {
-    width: 500px;
+.presentationBoxLeft,
+.presentationBoxRight {
+    width: 50%;
     height: auto;
+    margin-right: 5%;
+}
+
+.presentationBoxLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.presentationBoxRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .presentationBoxTitle {
@@ -274,10 +265,18 @@
     color: #3C2F2F;
 }
 
+
 .presentationBoxText {
+    height: 50%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    padding: 5%;
     margin-bottom: 5%;
     text-align: justify;
-    color: #3C2F2F;
+    font-family: Calibri;
+    scrollbar-color: #3c2f2f81;
+    scrollbar-color: #184a4575 transparent;
+    scrollbar-width: thin;
 }
 
 .presentationBoxLogo {
@@ -290,6 +289,9 @@
     width: 100%;
     height: 100vh;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .contactBackground {
@@ -306,25 +308,19 @@
 .contactTitle {
     font-size: 6rem;
     text-align: right;
-    top: 30%;
-    right: 60%;
-    position: relative;
-    z-index: 1;
     color: #F5F5DC;
     font-family: "Bocklin";
 }
 
 .contactForm {
-    position: relative;
-    z-index: 1;
-    left: 10%;
-    transform: translateY(-5%);
+    flex-direction: column;
 }
 
 .ContactLogo {
     display: flex;
     justify-content: center;
     margin-right: -40%;
+    margin-top: 5%;
 }
 
 .plusInfoCgu a {
@@ -333,6 +329,7 @@
     text-decoration: none;
     font-family: Calibri;
     right: 10%;
+    bottom: 10%;
     font-size: 12px;
 }
 
@@ -435,17 +432,22 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
+    background-color: rgba(245, 245, 220, 0.5);
+    transition: all ease-in-out 0.5s;
 }
 
 .Header nav {
-    background-color: transparent;
     width: 100%;
     border-color: gray;
+}
+
+.fullOpacity {
+    transition: all ease-in-out 0.5s;
+    background-color: rgba(245, 245, 220, 1);
 }
 
 .Header .Container {
@@ -454,8 +456,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    margin: 0 auto;
-    padding: 1rem;
+    margin: 5px auto;
 }
 
 .Header .menuButton {
@@ -469,9 +470,8 @@
 }
 
 .Header .logo img {
-    height: 5rem;
+    height: 3rem;
     border-radius: 50%;
-    transform: translate(-30%, 20%);
 }
 
 .Header .Navbar {
@@ -506,7 +506,6 @@
     position: relative;
     padding: 0.5rem 0.75rem;
     color: #184A45;
-    background-color: #f5f5dc;
     border: none;
     font-family: "Bocklin";
     font-size: 18px;
@@ -670,11 +669,9 @@
     background-color: rgba(245, 245, 220, 0.8);
     backdrop-filter: blur(2px);
     border-radius: 25px;
-    width: 550px;
+    width: 500px;
     height: 600px;
-    padding: 2.5%;
-    position: relative;
-    z-index: 100;
+    padding: 5%;
 }
 
 .formGroup {
@@ -914,13 +911,17 @@ textarea {
 
 /* Media queries */
 @media screen and (max-width: 1550px) {
+    .contentCreaCarousel {
+        transform: translateX(-8%);
+    }
+
     .carousel {
-        width: 600px;
-        height: 450px;
+        width: 800px;
+        height: 500px;
     }
 
     .imageContainer {
-        min-width: 600px;
+        min-width: 800px;
         height: 500px;
     }
 }
@@ -941,14 +942,6 @@ textarea {
         height: 350px;
     }
 
-    .number {
-        transform: translate(-180%, -50%);
-    }
-
-    .spe {
-        transform: translate(-210%, -50%);
-    }
-
     .quoteText,
     .authorText {
         font-size: 0.8rem;
@@ -963,19 +956,6 @@ textarea {
         height: 550px;
     }
 
-    .contactTitle {
-        left: 18%;
-        top: 25%;
-    }
-
-    .contactForm {
-        height: 500px;
-    }
-
-    textarea {
-        min-height: 200px;
-    }
-
     .Title {
         font-size: 2.5rem;
         padding: 20px 50px;
@@ -983,6 +963,14 @@ textarea {
 
     .Navbar ul li a {
         width: 200px;
+    }
+}
+
+@media screen and (max-width: 1380px) {
+
+    .contentCreaCarousel,
+    .contentCreaTitle {
+        transform: translateX(-15%);
     }
 }
 
@@ -996,14 +984,6 @@ textarea {
     .caseBox {
         width: 300px;
         height: 300px;
-    }
-
-    .number {
-        transform: translate(-170%, -50%);
-    }
-
-    .spe {
-        transform: translate(-210%, -50%);
     }
 
     .quoteText,
@@ -1032,18 +1012,14 @@ textarea {
         margin: 100px;
     }
 
+    .contentCreaCarousel,
+    .contentCreaTitle {
+        transform: translateX(0);
+    }
+
     .presentationImage {
         width: 350px;
         height: 450px;
-    }
-
-    .contactForm {
-        height: 400px;
-        width: 450px;
-    }
-
-    textarea {
-        min-height: 150px;
     }
 
     .Title {
@@ -1051,22 +1027,26 @@ textarea {
         padding: 20px 50px;
     }
 
+    .Navbar ul li {
+        margin-right: 0;
+    }
+
     .Navbar ul li a {
-        width: 200px;
+        width: 150px;
     }
 
     .carousel {
-        width: 500px;
-        height: 350px;
+        width: 600px;
+        height: 450px;
     }
 
     .imageContainer {
-        min-width: 500px;
-        height: 350px;
+        min-width: 600px;
+        height: 450px;
     }
 }
 
-@media screen and (max-width: 1120px) {
+@media screen and (max-width: 1150px) {
     .case {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1080,9 +1060,66 @@ textarea {
     .caseBoxContent {
         overflow-y: scroll;
     }
+
+    .contentCreaCarousel,
+    .contentCreaTitle {
+        transform: translateX(-12%);
+    }
 }
 
 @media screen and (max-width: 1050px) {
+    .Header {
+        height: auto;
+    }
+
+    .Header .Container {
+        flex-direction: row-reverse;
+    }
+
+    .Header .Container .menuButton {
+        display: block;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .Header .Container .menuButton svg {
+        width: 25px;
+        height: 25px;
+        fill: #184A45;
+    }
+
+    .Header .Container .Navbar {
+        display: none;
+    }
+
+    .open {
+        display: flex !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #f5f5dc;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .Navbar.open ul {
+        flex-direction: column;
+    }
+
+    .Navbar.open ul li {
+        margin: 10px 0;
+        width: 100%;
+    }
+
+    .Navbar.open ul li a {
+        width: 100%;
+        padding: 15px 0;
+    }
+
     .case {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -1091,16 +1128,24 @@ textarea {
 
     .caseBox {
         width: 230px;
-        height: 230px;
+        height: auto;
     }
 
-    .caseBoxContent {
-        margin-top: -25%;
+    .contentCrea {
+        flex-direction: column;
     }
 
     .contentCreaTitle {
-        font-size: 3rem;
-        margin: 5%;
+        display: flex;
+        align-items: center;
+    }
+
+    .contentCreaCarousel {
+        flex-shrink: 0;
+        gap: 0;
+        height: 500px;
+        justify-content: center;
+        transform: translateY(-25%);
     }
 
     .presentationImage {
@@ -1132,7 +1177,7 @@ textarea {
     }
 
     .Navbar ul li a {
-        width: 150px;
+        width: 120px;
     }
 
     .Title {
@@ -1140,12 +1185,42 @@ textarea {
         padding: 30px 20px;
     }
 
-    .Navbar ul {
-        gap: 0;
+    .leftText {
+        display: none;
     }
 
-    .Navbar ul li a {
-        width: 150px;
+    .contactTitle {
+        font-size: 4rem;
+    }
+
+    .carousel,
+    .imageContainer {
+        width: 100%;
+        height: 50vh;
+    }
+
+    #carouselContainer {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        /* Pour Firefox */
+        -ms-overflow-style: none;
+        /* Pour Internet Explorer et Edge */
+    }
+
+    #carouselContainer::-webkit-scrollbar {
+        display: none;
+        /* Pour Chrome, Safari et Opera */
+    }
+
+    #carouselTrack {
+        display: flex;
+        transition: none;
+        transform: none !important;
+    }
+
+    .imageContainer {
+        scroll-snap-align: start;
     }
 }
 
@@ -1163,23 +1238,6 @@ textarea {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 
-    .contentCrea {
-        flex-direction: column;
-    }
-
-    .contentCreaTitle {
-        margin-top: 40%;
-        transform: translateY(-40%);
-    }
-
-    .contentCreaCarousel {
-        flex-shrink: 0;
-        gap: 0;
-        height: 500px;
-        justify-content: center;
-        transform: translateY(-25%);
-    }
-
     .presentation {
         gap: 5%;
     }
@@ -1194,6 +1252,15 @@ textarea {
         height: auto;
     }
 
+    .contact {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contactTitle {
+        text-align: center;
+    }
+
     .contactForm {
         height: 400px;
         width: 350px;
@@ -1202,67 +1269,6 @@ textarea {
 
     textarea {
         min-height: 150px;
-    }
-
-    .carousel {
-        width: 400px;
-        height: 300px;
-    }
-
-    .imageContainer {
-        min-width: 400px;
-        height: 350px;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .Header .Container .menuButton {
-        display: block;
-        margin-top: 5%;
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
-
-    .Header .Container .menuButton svg {
-        width: 25px;
-        height: 25px;
-        fill: #184A45;
-    }
-
-    .logo {
-        margin-top: 5%;
-    }
-
-    .Header .Container .Navbar {
-        display: none;
-    }
-
-    .open {
-        display: flex !important;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 100%;
-        background-color: #f5f5dc;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .Navbar.open ul {
-        flex-direction: column;
-    }
-
-    .Navbar.open ul li {
-        margin: 10px 0;
-        width: 100%;
-    }
-
-    .Navbar.open ul li a {
-        width: 100%;
-        padding: 15px 0;
     }
 }
 
@@ -1273,19 +1279,11 @@ textarea {
 
     .case {
         margin-top: 2%;
-        height: 300px;
+        height: 500px;
         padding: 5%;
         grid-template-columns: minmax(200px, 1fr);
         overflow-y: scroll;
         gap: 40px;
-    }
-
-    .number {
-        transform: translate(-110%, -25%);
-    }
-
-    .spe {
-        transform: translate(-160%, -25%);
     }
 
     .questionsText {
@@ -1314,11 +1312,14 @@ textarea {
     }
 
     .contentCreaTitle {
-        font-size: 2rem;
+        font-size: 3rem;
+        margin-top: -10%;
     }
 
     .presentation {
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .presentationImage {
@@ -1326,42 +1327,28 @@ textarea {
         height: 150px;
     }
 
-    .presentationBox {
-        width: 80%;
-        margin-left: 15%;
-    }
-}
-
-@media screen and (min-width: 600px) and (max-width: 950px) and (orientation: portrait) {
-    .contactTitle {
-        font-size: 5rem;
-        top: 25%;
-        left: 15%;
-    }
-
-    .contactForm {
-        transform: translateY(-25%);
-        left: 15%;
-    }
-
-    .ContactLogo {
-        margin-right: -25%;
-    }
-}
-
-@media screen and (min-width: 600px) and (max-width: 1200px) and (orientation: landscape) {
-    .contactTitle {
-        font-size: 5rem;
-        top: 25%;
-        left: 15%;
+    .presentationBoxRight {
+        width: 90%;
+        height: 60%;
     }
 }
 
 @media screen and (max-width: 600px) {
     .contactTitle {
-        font-size: 2.5rem;
-        left: 10%;
-        top: 35%;
+        font-size: 3rem;
+        margin-top: 10%;
+    }
+
+    .Instagram {
+        height: 100%;
+    }
+
+    .condition {
+        margin-bottom: 5px;
+    }
+
+    .Copyright {
+        font-size: 9px;
     }
 }
 
@@ -1375,20 +1362,9 @@ textarea {
         margin-bottom: 2.5%;
     }
 
-    .contentCreaTitle {
-        margin-top: 43%;
-        margin-left: 15%;
-    }
-
-    .contactTitle {
-        display: none;
-    }
-
     .contactForm {
         width: 300px;
         padding: 3.5%;
-        left: 0;
-        transform: translateY(50%);
     }
 
     .customGroup {
@@ -1402,22 +1378,7 @@ textarea {
         margin-left: 0;
     }
 
-    .condition {
-        margin-bottom: 15%;
-    }
-
     .Title {
         text-align: center;
-    }
-
-    .carousel {
-        margin-top: 40%;
-        width: 260px;
-        height: 260px;
-    }
-
-    .imageContainer {
-        min-width: 260px;
-        height: 260px;
     }
 }

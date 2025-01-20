@@ -75,7 +75,7 @@
 
 .condition {
     font-size: 14px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Calibri;
     color: #184A45;
     font-weight: 500;
     display: flex;
@@ -97,4 +97,24 @@
     font-size: 12px;
     padding: 1%;
     margin-top: 2%;
+}
+
+@media screen and (max-width: 600px) {
+    .title {
+        width: 50%;
+        font-size: 1.2rem;
+        text-align: right;
+        margin-left: 30%;
+        margin-bottom: 10%;
+    }
+
+    .Copyright {
+        font-size: 9px;
+    }
+
+    .footerTitle {
+        font-size: 2rem;
+        margin: auto;
+        padding: 20px 0;
+    }
 }

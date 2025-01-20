@@ -88,10 +88,10 @@ if (isset($_POST['mailform'])) {
                     </a>
                     <button class="menuButton" aria-controls="navbar" aria-expanded="false">
                         <span class="sr-only" style="display: none;">Open main menu</span>
-                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="#184A45"
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 17 14">
-                            <path stroke="#184A45" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 1h15M1 7h15M1 13h15" />
+                            <path stroke="#184A45" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill="#184A45"
+                                d="M1 1h15M1 7h15M1 13h15"/>
                         </svg>
                     </button>
                     <div class="Navbar" id="navbar">
@@ -137,7 +137,7 @@ if (isset($_POST['mailform'])) {
                 </div>
                 <div class="case">
                     <div class="caseBox">
-                        <div class="number spe">1</div>
+                        <div class="number">1</div>
                         <div class="caseBoxContent">
                             <h3 class="caseTitle">Création de costumes et cosplay sur-mesure</h3>
                             <p>Remplir le <a href="#" class="download" target="_blank"
@@ -188,9 +188,11 @@ if (isset($_POST['mailform'])) {
         </section>
 
         <section class="presentation" id="presentation">
-            <div class="presentationImage" style="background-image: url('./ressources/images/background/portrait.jpg');">
+            <div class="presentationBoxLeft">
+                <div class="presentationImage" style="background-image: url('./ressources/images/background/portrait.jpg');">
+                </div>
             </div>
-            <div class="presentationBox">
+            <div class="presentationBoxRight">
                 <h2 class="presentationBoxTitle">Qui Suis-je ?</h2>
                 <p class="presentationBoxText">
                     Salut ! Moi, c'est Lise. <br />
@@ -254,7 +256,7 @@ if (isset($_POST['mailform'])) {
             <div class="contactBackground"
                 style="background-image: url('./ressources/images/background/machine_a_coudre.jpg');"></div>
             <div class="contactTitle">
-                CONTACT<br />ME
+                CONTACTEZ<br />MOI
             </div>
             <div>
                 <div>

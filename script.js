@@ -70,8 +70,8 @@ var carouselItems = [
 ];
 var currentIndex = 0;
 function initCarousel() {
-    var _a, _b;
     var carouselTrack = document.getElementById('carouselTrack');
+    var carouselContainer = document.getElementById('carouselContainer');
     if (carouselTrack) {
         carouselItems.forEach(function (item, index) {
             var itemElement = document.createElement('div');
@@ -80,8 +80,41 @@ function initCarousel() {
             carouselTrack.appendChild(itemElement);
         });
     }
-    (_a = document.querySelector('.navButtonLeft')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', handlePrev);
-    (_b = document.querySelector('.navButtonRight')) === null || _b === void 0 ? void 0 : _b.addEventListener('click', handleNext);
+    var leftButton = document.querySelector('.navButtonLeft');
+    var rightButton = document.querySelector('.navButtonRight');
+    if (leftButton && rightButton) {
+        leftButton.addEventListener('click', handlePrev);
+        rightButton.addEventListener('click', handleNext);
+    }
+    // Gestion du comportement en fonction de la taille de l'écran
+    function handleResize() {
+        if (window.innerWidth <= 1050) {
+            if (carouselContainer) {
+                carouselContainer.style.overflowX = 'auto';
+            }
+            if (carouselTrack) {
+                carouselTrack.style.transform = 'none';
+            }
+        }
+        else {
+            if (carouselContainer) {
+                carouselContainer.style.overflowX = 'hidden';
+            }
+            updateCarousel();
+        }
+    }
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Appel initial pour configurer le bon état
+}
+function updateCarousel() {
+    if (window.innerWidth > 1050) {
+        var carouselTrack = document.getElementById('carouselTrack');
+        var imageContainer = document.querySelector('.imageContainer');
+        if (carouselTrack && imageContainer) {
+            var containerWidth = imageContainer.offsetWidth;
+            carouselTrack.style.transform = "translateX(-".concat(currentIndex * containerWidth, "px)");
+        }
+    }
 }
 function handleNext() {
     currentIndex = (currentIndex + 1) % carouselItems.length;
@@ -90,14 +123,6 @@ function handleNext() {
 function handlePrev() {
     currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
     updateCarousel();
-}
-function updateCarousel() {
-    var carouselTrack = document.getElementById('carouselTrack');
-    var imageContainer = document.querySelector('.imageContainer');
-    if (carouselTrack && imageContainer) {
-        var containerWidth = imageContainer.offsetWidth;
-        carouselTrack.style.transform = "translateX(-".concat(currentIndex * containerWidth, "px)");
-    }
 }
 document.addEventListener('DOMContentLoaded', initCarousel);
 window.addEventListener('resize', updateCarousel);
@@ -112,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Menu toggled, open:', navbar.classList.contains('open'));
     }
     function handleResize() {
-        if (window.innerWidth > 800) {
+        if (window.innerWidth > 1050) {
             navbar.classList.remove('open');
             menuButton.setAttribute('aria-expanded', 'false');
             menuButton.style.display = 'none';
@@ -123,10 +148,31 @@ document.addEventListener('DOMContentLoaded', function () {
             navbar.style.display = navbar.classList.contains('open') ? 'block' : 'none';
         }
     }
+    function closeMenuOnScroll() {
+        if (window.innerWidth <= 1050 && navbar.classList.contains('open')) {
+            navbar.classList.remove('open');
+            menuButton.setAttribute('aria-expanded', 'false');
+            navbar.style.display = 'none';
+        }
+    }
+    function handleScroll() {
+        var header = document.querySelector('.Header');
+        if (window.scrollY > 50) {
+            header.classList.add('fullOpacity');
+        }
+        else {
+            header.classList.remove('fullOpacity');
+        }
+    }
     menuButton.addEventListener('click', toggleMenu);
     window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', function () {
+        closeMenuOnScroll();
+        handleScroll();
+    });
     // Initial call to set correct state
     handleResize();
+    handleScroll();
 });
 // FORMULAIRE CONTACT
 (_a = document.getElementById('file')) === null || _a === void 0 ? void 0 : _a.addEventListener('change', function () {
