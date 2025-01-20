@@ -33,6 +33,10 @@
     font-size: 1.2rem;
 }
 
+.list {
+    margin-left: 2.5%;
+}
+
 .head {
     position: absolute;
     top: 2%;

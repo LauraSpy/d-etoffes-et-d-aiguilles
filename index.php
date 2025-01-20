@@ -76,6 +76,8 @@ if (isset($_POST['mailform'])) {
     <title>D'étoffes et d'Aiguilles</title>
     <link rel="stylesheet" href="index.css">
     <link rel="icon" type="image/png" href="./ressources/logo/logo_favicon.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -262,11 +264,11 @@ if (isset($_POST['mailform'])) {
                 <div>
                     <form id="contactForm" class="contactForm" name="contact" method="POST" action="" enctype="multipart/form-data">
                         <div class="formGroup">
-                            <input type="text" id="name" name="name" placeholder="Nom Prénom / Pseudo" required />
+                            <input autocomplete="on" type="text" id="name" name="name" placeholder="Nom Prénom / Pseudo" required />
                         </div>
                         <div class="lineGradient"></div>
                         <div class="formGroup">
-                            <input type="email" id="email" name="email" placeholder="Mail *" required />
+                            <input autocomplete="on" type="email" id="email" name="email" placeholder="Mail *" required />
                         </div>
                         <div class="lineGradient"></div>
                         <div class="formGroup">
@@ -316,9 +318,8 @@ if (isset($_POST['mailform'])) {
         </section>
 
         <footer class="Footer">
-            <div class="Instagram">
-                <script src="https://static.elfsight.com/platform/platform.js" async></script>
-                <div class="elfsight-app-883fb067-3d15-42bc-bd53-9aa5746ec2a2" data-elfsight-app-lazy></div>
+            <div class="Instagram" id="elfsight-container">
+                
             </div>
             <div class="FooterContent">
                 <div class="condition">
@@ -349,6 +350,32 @@ if (isset($_POST['mailform'])) {
         </footer>
 
     </div>
+
+    <div class="modal fade" id="cookieModal" tabindex="-1" aria-labelledby="cookieModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cookieModalLabel">Politique de cookies</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p> Ce site utilise des cookies pour améliorer votre expérience.</p> 
+                <p>Il utilise également ceux du service Elfsight Instagram Feed pour afficher du contenu Instagram sur notre site. </p>
+                    <p>Pour connaître tous les cookies utilisés par
+                    ce service, vous pouvez visiter nos <a href="./TermsOfServices/MentionsLegales.html">Mentions Légales</a>, dans la rubrique "Cookies". </p>
+                    <p class="fw-bold text-center" style="font-Size: 12px">Noter qu'à partir de 2025, Google Chrome prévoit de bloquer les cookies tiers. 
+                    La fonctionnalité du widget Instagram pourrait être affectée à l'avenir en raison de ces changements. </p>
+                <p>En acceptant les cookies essentiels, vous autorisez l'utilisation de ces cookies tiers.
+                <br><span style="font-Size: 12px">Si vous fermer la fenêtre, le widget Instagram ne pourra pas s'afficher.</span> </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" id="acceptCookies">Accepter</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 

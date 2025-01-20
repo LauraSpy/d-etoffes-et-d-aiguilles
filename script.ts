@@ -1,3 +1,66 @@
+
+
+// FENETRE POPUP COOKIES
+document.addEventListener('DOMContentLoaded', () => {
+    const cookieModal = new (window as any).bootstrap.Modal(document.getElementById('cookieModal'));
+    const acceptCookiesBtn = document.getElementById('acceptCookies');
+    const closeCookiesBtn = document.getElementById('closeCookies');
+
+    if (!localStorage.getItem('cookiesAccepted')) {
+        cookieModal.show();
+    }
+
+    acceptCookiesBtn?.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookieModal.hide();
+        enableElfsightWidget(); // Fonction pour activer le widget
+    });
+
+    closeCookiesBtn?.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'false');
+        cookieModal.hide();
+        disableElfsightWidget(); // Fonction pour désactiver le widget
+    });
+
+    // Vérifiez l'état des cookies au chargement de la page
+    if (localStorage.getItem('cookiesAccepted') === 'true') {
+        enableElfsightWidget();
+    } else {
+        disableElfsightWidget();
+    }
+});
+
+function enableElfsightWidget() {
+    const container = document.getElementById('elfsight-container');
+    if (container) {
+        // Effacer le contenu existant
+        container.textContent = '';
+
+        // Ajouter le script Elfsight
+        const script = document.createElement('script');
+        script.src = "https://static.elfsight.com/platform/platform.js";
+        script.async = true;
+        document.body.appendChild(script);
+
+        // Ajouter le div du widget
+        const widgetDiv = document.createElement('div');
+        widgetDiv.className = "elfsight-app-883fb067-3d15-42bc-bd53-9aa5746ec2a2";
+        widgetDiv.setAttribute('data-elfsight-app-lazy', '');
+        container.appendChild(widgetDiv);
+    }
+}
+
+function disableElfsightWidget() {
+    const container = document.getElementById('elfsight-container');
+    if (container) {
+        container.innerHTML = "<p>Widget Instagram not loaded: <strong>accept cookies to see</strong></p>";
+        container.style.color = '#F5F5DC';
+    }
+}
+
+
+
+// BOUTON DU SCROLL POUR PASSER LE HERO
 function initHero(): void {
     const scrollButton = document.querySelector('.scrollButton');
     if (scrollButton) {
@@ -110,35 +173,47 @@ function initCarousel(): void {
 
     // Gestion du comportement en fonction de la taille de l'écran
     function handleResize() {
+        const carouselTrack = document.getElementById('carouselTrack');
         if (window.innerWidth <= 1050) {
             if (carouselContainer) {
                 carouselContainer.style.overflowX = 'auto';
             }
             if (carouselTrack) {
                 carouselTrack.style.transform = 'none';
+                carouselTrack.style.width = '100vmax';
+                carouselTrack.style.overflowX = 'scroll';
             }
         } else {
             if (carouselContainer) {
                 carouselContainer.style.overflowX = 'hidden';
             }
+            if (carouselTrack) {
+                carouselTrack.style.width = ''; // Réinitialiser la largeur
+                carouselTrack.style.overflowX = ''; // Réinitialiser l'overflow
+            }
             updateCarousel();
         }
     }
 
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Appel initial pour configurer le bon état
+    window.addEventListener('resize', () => {
+        handleResize();
+        updateCarousel();
+    });
 }
 
 function updateCarousel(): void {
-    if (window.innerWidth > 1050) {
-        const carouselTrack = document.getElementById('carouselTrack');
-        const imageContainer = document.querySelector('.imageContainer') as HTMLElement;
-        if (carouselTrack && imageContainer) {
+    const carouselTrack = document.getElementById('carouselTrack');
+    const imageContainer = document.querySelector('.imageContainer') as HTMLElement;
+    if (carouselTrack && imageContainer) {
+        if (window.innerWidth > 1050) {
             const containerWidth = imageContainer.offsetWidth;
             carouselTrack.style.transform = `translateX(-${currentIndex * containerWidth}px)`;
+        } else {
+            carouselTrack.style.transform = 'none';
         }
     }
 }
+
 
 function handleNext(): void {
     currentIndex = (currentIndex + 1) % carouselItems.length;
@@ -151,7 +226,6 @@ function handlePrev(): void {
 }
 
 document.addEventListener('DOMContentLoaded', initCarousel);
-window.addEventListener('resize', updateCarousel);
 
 
 
@@ -242,3 +316,5 @@ document.addEventListener('DOMContentLoaded', () => {
         alertMessage.style.display = 'none';
     }
 });
+
+
