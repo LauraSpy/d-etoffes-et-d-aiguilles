@@ -1,22 +1,15 @@
 @font-face {
     font-family: "Bocklin";
     src: url('./ressources/fonts/bocklin/Bocklin.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: "HerrVonMuellerhoff";
-    src: url('./ressources/fonts/herr-von-muellerhoff/HerrVonMuellerhoff-Regular.ttf') format('truetype');
+    font-display: swap;
 }
 
 @font-face {
     font-family: "Nightingale";
     src: url('./ressources/fonts/nightingale/Nightingale.ttf') format('truetype');
+    font-display: swap;
 }
 
-@font-face {
-    font-family: "Scriptina";
-    src: url('./ressources/fonts/scriptina/SCRIPTIN.ttf') format('truetype');
-}
 
 * {
     box-sizing: border-box;
@@ -329,7 +322,7 @@
     text-decoration: none;
     font-family: Calibri;
     right: 10%;
-    bottom: 10%;
+    bottom: 5%;
     font-size: 12px;
 }
 
@@ -471,6 +464,7 @@
 
 .Header .logo img {
     height: 3rem;
+    width: 3rem;
     border-radius: 50%;
 }
 
@@ -1246,17 +1240,28 @@ textarea {
     }
 
     .presentation {
-        gap: 5%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .presentationImage {
         width: 250px;
-        height: 350px;
+        height: 250px;
     }
 
-    .presentationBox {
-        width: 50%;
-        height: auto;
+    .presentationBoxRight {
+        margin-top: -15%;
+    }
+
+    .presentationBoxRight {
+        width: 100%;
+        margin: 0;
+        height: 60%;
+    }
+
+    .presentationBoxText {
+        height: 75%;
     }
 
     .contact {
@@ -1320,23 +1325,13 @@ textarea {
 
     .contentCreaTitle {
         font-size: 3rem;
-        margin-top: -10%;
+        align-items: flex-start;
     }
 
-    .presentation {
-        flex-direction: column;
+    .contentCreaCarousel {
+        height: 350px;
         justify-content: center;
-        align-items: center;
-    }
-
-    .presentationImage {
-        width: 150px;
-        height: 150px;
-    }
-
-    .presentationBoxRight {
-        width: 90%;
-        height: 60%;
+        transform: translateY(-30%);
     }
 }
 
@@ -1387,5 +1382,9 @@ textarea {
 
     .Title {
         text-align: center;
+    }
+
+    .presentationBoxText {
+        width: 100%;
     }
 }
