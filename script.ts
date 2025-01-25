@@ -87,57 +87,57 @@ interface CarouselItem {
 
 const carouselItems: CarouselItem[] = [
     {
-        image: `/ressources/images/Création/robeMedievalFantasy.jpg`,
+        image: `/ressources/images/Création/robeMedievalFantasy.webp`,
         title: "Des Hobbits de la Comté",
         description: "Tenues médiévales/fantasy, corset et jupe. (Modèle à gauche : instagram @texou_cosplay)"
     },
     {
-        image: `/ressources/images/Création/shanksJacket.jpg`,
+        image: `/ressources/images/Création/shanksJacket.webp`,
         title: "Veste type pirate H/F",
         description: "Veste de pirate, taille unique, non genré."
     },
     {
-        image: `/ressources/images/Création/robeBlanche.jpg`,
+        image: `/ressources/images/Création/robeBlanche.webp`,
         title: "Robe de chambre victorienne",
         description: "Type de robe style Crimson Peak, historique, taille unique"
     },
     {
-        image: `/ressources/images/Ciri/ciri_4.jpg`,
+        image: `/ressources/images/Ciri/Ciri_4.webp`,
         title: "Ciri, The Witcher",
         description: "Design original inspiré du personnage de Ciri dans The Witcher"
     },
     {
-        image: `/ressources/images/Création/robemedieval.jpg`,
+        image: `/ressources/images/Création/robemedieval.webp`,
         title: "Robe style médiévale",
         description: "Inspirée de l'univers de The Witcher, style médiéval fantasy, Haut et jupe séparable, Taille XS"
     },
     {
-        image: `/ressources/images/Création/robeHisto.jpg`,
+        image: `/ressources/images/Création/robeHisto.webp`,
         title: "Robe Historique, 1730",
         description: "Création originale, robe historique créée à partir de rideaux, entièrement faite main"
     },
     {
-        image: `/ressources/images/AC/Elise/eliseFull.jpg`,
+        image: `/ressources/images/AC/Elise/eliseFull.webp`,
         title: "Robe 18ème, entre la polonaise et l'anglaise",
         description: "Inspiré de la robe de bal d'Elise de la Serre dans Assassin's Creed Unity, Robe à la polonaise mixé à l'Anglaise pour la longueur, et à la Française pour la pièce d'Estomac"
     },
     {
-        image: `/ressources/images/Création/elfe.jpg`,
+        image: `/ressources/images/Création/elfe.webp`,
         title: "Elfe de la forêt",
         description: "Tenue originale d'une tunique en lin avec veste et brassards en simili, taille XS"
     },
     {
-        image: `/ressources/images/Création/sorciere.jpg`,
+        image: `/ressources/images/Création/sorciere.webp`,
         title: "Sorcière",
         description: "Tenue originale d'une sorcière, avec son bâton lumineux, taille XS"
     },
     {
-        image: `/ressources/images/Création/jedi.jpg`,
+        image: `/ressources/images/Création/jedi.webp`,
         title: "Costume de Jedi",
         description: "Tenue et création d'une tenue de Jedi, inspiré des tenues de Star Wars, taille XS à S"
     },
     {
-        image: `/ressources/images/Création/sith.jpg`,
+        image: `/ressources/images/Création/sith.webp`,
         title: "Tenue de Seigneur Sith",
         description: "Tenue originale d'un Sith de l'univers Star Wars, Taille sur mesure, et pièces d'armure en mousse avec leds intégrées"
     }
