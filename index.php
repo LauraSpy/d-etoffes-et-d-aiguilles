@@ -28,8 +28,8 @@ if (isset($_POST['mailform'])) {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port       = 465;
 
-            $mail->setFrom('admin@d-etoffes-et-d-aiguilles.fr', 'D\'Etoffes et d\'Aiguilles');
-            $mail->addAddress('admin@d-etoffes-et-d-aiguilles.fr');
+            $mail->setFrom('noreply@d-etoffes-et-d-aiguilles.fr', 'D\'Etoffes et d\'Aiguilles');
+            $mail->addAddress('noreply@d-etoffes-et-d-aiguilles.fr');
 
             $mail->isHTML(true);
             $mail->Subject = "CONTACT - d-etoffes-et-d-aiguilles.fr";
@@ -41,17 +41,13 @@ if (isset($_POST['mailform'])) {
                     " . nl2br($user_message) . "
                 </div>";
 
-            if(isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
-                $mail->addAttachment($_FILES['file']['tmp_name'], $_FILES['file']['name']);
-            }
-
             $mail->send();
             $msg = "Votre message a bien été envoyé !";
         } catch (Exception $e) {
             $msg = "Le message n'a pas pu être envoyé. Erreur: {$mail->ErrorInfo}";
         }
     } else {
-        $msg = "Tous les champs doivent être complétés !";
+        $msg = "Une Erreur est survenue. Veuillez réessayer plus tard.";
     }
 }
 
@@ -266,7 +262,7 @@ if (isset($_POST['mailform'])) {
             <div>
                 <!-- contact form -->
                 <div>
-                    <form id="contactForm" class="contactForm" name="contact" method="POST" action="" enctype="multipart/form-data">
+                    <form id="contactForm" class="contactForm" name="contact" method="POST" action="">
                         <div class="formGroup">
                             <input autocomplete="on" type="text" id="name" name="name" placeholder="Nom Prénom / Pseudo" required />
                         </div>
@@ -279,17 +275,9 @@ if (isset($_POST['mailform'])) {
                             <textarea id="message" name="message" placeholder="Message"
                                 title="Ne renseignez jamais de numéros de téléphone"></textarea>
                         </div>
-                        <div class="formGroup customGroup">
-                        <!-- adding a file available -->
-                            <input type="file" id="file" name="file" style="display: none;" />
-                            <label for="file" class="customFileUpload">
-                                Choisir un fichier
-                            </label>
-                            <!-- submit button -->
+                        <div class="formGroup">
+                            <!-- Removed file upload input -->
                             <button type="submit" class="submitButton" name="mailform">Envoyer</button>
-                            <br>
-                            <!-- placement to print the name of the file uploaded -->
-                            <span class="fileName"></span>
                         </div>
                     </form>
                     <!-- popup message to confirm if the message were sent or not -->

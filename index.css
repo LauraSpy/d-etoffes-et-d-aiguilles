@@ -28,7 +28,7 @@
 .nextSection {
     width: 100%;
     height: 100vh;
-    background: rgba(245, 245, 220, 1) url('./ressources/images/background/jolie_deco.jpg') center / cover no-repeat;
+    background: rgba(245, 245, 220, 1) url('./ressources/images/background/jolie_deco.webp') center / cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -329,14 +329,18 @@
 /*    A L E R T   B O X    */
 
 .message {
-    position: absolute;
-    top: 10%;
-    right: 30%;
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
     padding: 1%;
     background-color: #F5F5DC;
     color: #184A45;
     font-family: Calibri;
     border-radius: 15px;
+    z-index: 3000;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* Added box shadow */
 }
 
 
@@ -354,7 +358,7 @@
     width: 100%;
     height: 100%;
     position: relative;
-    background: rgba(245, 245, 220, 1) url('./ressources/images/background/triptyque.jpg') center / cover no-repeat;
+    background: rgba(245, 245, 220, 1) url('./ressources/images/background/triptyque.webp') center / cover no-repeat;
 }
 
 .blurredBackground {
@@ -666,7 +670,7 @@
     border-radius: 25px;
     width: 500px;
     height: 600px;
-    padding: 5%;
+    padding: 10%;
 }
 
 .formGroup {
@@ -708,28 +712,6 @@ textarea {
     margin-left: 9px;
 }
 
-.customFileUpload {
-    border: 1px solid #3c2f2f8a;
-    display: inline-block;
-    padding: 3px 6px;
-    cursor: pointer;
-    background-color: transparent;
-    border-radius: 4px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    transition: all 0.3s ease;
-}
-
-.customFileUpload:hover {
-    background-color: #184A45;
-    color: rgba(245, 245, 220, 0.8);
-}
-
-.fileName {
-    margin-left: 10px;
-    font-style: italic;
-    font-size: 12px;
-}
-
 .submitButton {
     background: none;
     border: none;
@@ -739,7 +721,8 @@ textarea {
     font-size: 1.2rem;
     font-family: "Calibri";
     padding: 10px 15px;
-    margin-left: 10%;
+    margin-left: 50%;
+    transform: translateX(-50%);
     margin-top: 2%;
     transition: color 0.3s;
     text-transform: uppercase;
@@ -796,18 +779,15 @@ textarea {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     background-color: #F5F5DC;
 }
 
 .Instagram {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
-    height: 50%;
-    width: 100%;
     background-color: #3C2F2F;
     text-align: center;
     padding: 5px;
@@ -817,10 +797,20 @@ textarea {
     display: none;
 }
 
+#elfsight-container {
+    height: 50%;
+}
+
+.eapps-instagram-feed-title-container {
+    display: none;
+}
+
 .FooterContent {
     color: #3C2F2F;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    height: 30%;
 }
 
 .Title {
@@ -830,15 +820,17 @@ textarea {
     font-family: "Bocklin";
 }
 
-.condition a {
-    font-size: 14px;
-    font-family: Calibri;
-    color: #184A45;
+.condition {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.condition a {
+    font-size: 14px;
+    font-family: Calibri;
     text-decoration: none;
-    margin-bottom: 15px;
+    color: #184A45;
     transition: ease;
 }
 
@@ -1282,7 +1274,6 @@ textarea {
     .contactForm {
         height: 400px;
         width: 350px;
-        padding: 3.2%;
     }
 
     textarea {
@@ -1309,8 +1300,11 @@ textarea {
     }
 
     .FooterContent {
-        padding-bottom: 5%;
-        padding-top: 5%;
+        height: 35%;
+    }
+
+    #elfsight-container {
+        height: 75%;
     }
 
     .Navbar ul {
@@ -1352,12 +1346,9 @@ textarea {
         margin-top: 10%;
     }
 
-    .Instagram {
-        height: 100%;
-    }
-
     .condition {
-        margin-bottom: 5px;
+        height: 100px;
+        margin-top: 10%;
     }
 
     .Copyright {
@@ -1377,18 +1368,12 @@ textarea {
 
     .contactForm {
         width: 300px;
-        padding: 3.5%;
     }
 
     .customGroup {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-
-    .submitButton,
-    .fileName {
-        margin-left: 0;
     }
 
     .Title {
