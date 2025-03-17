@@ -89,7 +89,37 @@ interface CarouselItem {
 
 const carouselItems: CarouselItem[] = [
     {
+        image: `/ressources/images/vitrine/hobbitwebp`,
+        title: "Des Hobbits de la Comté",
+        description: "Tenues médiévales/fantasy, corset et jupe. (Modèle à gauche : instagram @texou_cosplay)"
+    },
+    {
+        image: `/ressources/images/vitrine/shanks.webp`,
+        title: "Veste type pirate H/F",
+        description: "Veste de pirate, taille unique, non genré."
+    },
+    {
         image: `/ressources/images/vitrine/ciri.webp`,
+        title: "Ciri, The Witcher",
+        description: "Design original inspiré du personnage de Ciri dans The Witcher"
+    },
+    {
+        image: `/ressources/images/vitrine/robehisto.webp`,
+        title: "Robe Historique, 1730",
+        description: "Création originale, robe historique créée à partir de rideaux, entièrement faite main"
+    },
+    {
+        image: `/ressources/images/vitrine/elfe.webp`,
+        title: "Elfe de la forêt",
+        description: "Tenue originale d'une tunique en lin avec veste et brassards en simili, taille XS"
+    },
+    {
+        image: `/ressources/images/vitrine/sorciere.webp`,
+        title: "Sorcière",
+        description: "Tenue originale d'une sorcière, avec son bâton lumineux, taille XS"
+    },
+    {
+        image: `/ressources/images/vitrine/ciri2.webp`,
         title: "Ciri, The Witcher",
         description: "Design original inspiré du personnage de Ciri dans The Witcher"
     },
