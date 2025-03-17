@@ -1,0 +1,9 @@
+# Désactiver l'exécution des scripts PHP dans les répertoires sensibles
+# <FilesMatch "\.(php|phar|phtml)$">
+#     deny from all
+# </FilesMatch>
+
+# Forcer HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

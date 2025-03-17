@@ -1,25 +1,27 @@
-
-
 // FENETRE POPUP COOKIES
 document.addEventListener('DOMContentLoaded', () => {
-    const cookieModal = new (window as any).bootstrap.Modal(document.getElementById('cookieModal'));
+    const cookieModalElement = document.getElementById('cookieModal');
+    const cookieModal = cookieModalElement ? new (window as any).bootstrap.Modal(cookieModalElement) : null;
     const acceptCookiesBtn = document.getElementById('acceptCookies');
-    const closeCookiesBtn = document.getElementById('closeCookies');
+    const closeCookiesBtn = document.querySelector('.btn-close');
 
-    if (!localStorage.getItem('cookiesAccepted')) {
+    // Afficher la modale si les cookies n'ont pas encore été acceptés
+    if (cookieModal && !localStorage.getItem('cookiesAccepted')) {
         cookieModal.show();
     }
 
+    // Gestion du bouton "Accepter"
     acceptCookiesBtn?.addEventListener('click', () => {
         localStorage.setItem('cookiesAccepted', 'true');
-        cookieModal.hide();
-        enableElfsightWidget(); // Fonction pour activer le widget
+        cookieModal?.hide();
+        enableElfsightWidget(); // Activer le widget
     });
 
+    // Gestion du bouton "Fermer"
     closeCookiesBtn?.addEventListener('click', () => {
         localStorage.setItem('cookiesAccepted', 'false');
-        cookieModal.hide();
-        disableElfsightWidget(); // Fonction pour désactiver le widget
+        cookieModal?.hide();
+        disableElfsightWidget(); // Désactiver le widget
     });
 
     // Vérifiez l'état des cookies au chargement de la page
@@ -87,59 +89,29 @@ interface CarouselItem {
 
 const carouselItems: CarouselItem[] = [
     {
-        image: `/ressources/images/Création/robeMedievalFantasy.webp`,
-        title: "Des Hobbits de la Comté",
-        description: "Tenues médiévales/fantasy, corset et jupe. (Modèle à gauche : instagram @texou_cosplay)"
-    },
-    {
-        image: `/ressources/images/Création/shanksJacket.webp`,
-        title: "Veste type pirate H/F",
-        description: "Veste de pirate, taille unique, non genré."
-    },
-    {
-        image: `/ressources/images/Création/robeBlanche.webp`,
-        title: "Robe de chambre victorienne",
-        description: "Type de robe style Crimson Peak, historique, taille unique"
-    },
-    {
-        image: `/ressources/images/Ciri/Ciri_4.webp`,
+        image: `/ressources/images/vitrine/ciri.webp`,
         title: "Ciri, The Witcher",
         description: "Design original inspiré du personnage de Ciri dans The Witcher"
     },
     {
-        image: `/ressources/images/Création/robemedieval.webp`,
-        title: "Robe style médiévale",
-        description: "Inspirée de l'univers de The Witcher, style médiéval fantasy, Haut et jupe séparable, Taille XS"
+        image: `/ressources/images/vitrine/dame_blanche.webp`,
+        title: "Robe de chambre victorienne",
+        description: "Type de robe style Crimson Peak, historique, taille unique"
     },
     {
-        image: `/ressources/images/Création/robeHisto.webp`,
-        title: "Robe Historique, 1730",
-        description: "Création originale, robe historique créée à partir de rideaux, entièrement faite main"
-    },
-    {
-        image: `/ressources/images/AC/Elise/eliseFull.webp`,
+        image: `/ressources/images/vitrine/elise.webp`,
         title: "Robe 18ème, entre la polonaise et l'anglaise",
         description: "Inspiré de la robe de bal d'Elise de la Serre dans Assassin's Creed Unity, Robe à la polonaise mixé à l'Anglaise pour la longueur, et à la Française pour la pièce d'Estomac"
     },
     {
-        image: `/ressources/images/Création/elfe.webp`,
-        title: "Elfe de la forêt",
-        description: "Tenue originale d'une tunique en lin avec veste et brassards en simili, taille XS"
-    },
-    {
-        image: `/ressources/images/Création/sorciere.webp`,
-        title: "Sorcière",
-        description: "Tenue originale d'une sorcière, avec son bâton lumineux, taille XS"
-    },
-    {
-        image: `/ressources/images/Création/jedi.webp`,
-        title: "Costume de Jedi",
-        description: "Tenue et création d'une tenue de Jedi, inspiré des tenues de Star Wars, taille XS à S"
-    },
-    {
-        image: `/ressources/images/Création/sith.webp`,
+        image: `/ressources/images/vitrine/sith.webp`,
         title: "Tenue de Seigneur Sith",
         description: "Tenue originale d'un Sith de l'univers Star Wars, Taille sur mesure, et pièces d'armure en mousse avec leds intégrées"
+    },
+    {
+        image: `/ressources/images/vitrine/yenn.webp`,
+        title: "Yennefer, The Witcher",
+        description: "Tenue inspirée du personnage de Yennefer dans The Witcher, élégante et mystérieuse"
     }
 ];
 
@@ -290,6 +262,24 @@ document.getElementById('file')?.addEventListener('change', function (this: HTML
     const fileName = document.querySelector('.fileName');
     if (fileName && this.files && this.files[0]) {
         fileName.textContent = this.files[0].name;
+    }
+});
+
+// Validation des champs de formulaire pour éviter les scripts
+document.getElementById('contactForm')?.addEventListener('submit', (event) => {
+    const nameInput = document.getElementById('name') as HTMLInputElement;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+
+    const sanitize = (value: string) => value.replace(/<[^>]*>?/gm, '');
+
+    nameInput.value = sanitize(nameInput.value);
+    emailInput.value = sanitize(emailInput.value);
+    messageInput.value = sanitize(messageInput.value);
+
+    if (!nameInput.value || !emailInput.value || !messageInput.value) {
+        event.preventDefault();
+        alert('Veuillez remplir tous les champs correctement.');
     }
 });
 

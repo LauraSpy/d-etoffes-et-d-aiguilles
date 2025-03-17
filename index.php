@@ -12,11 +12,11 @@ require_once 'config.php';
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 if (isset($_POST['mailform'])) {
-    $nom = $_POST['name'];
-    $email = $_POST['email'];
-    $user_message = $_POST['message'];
+    $nom = htmlspecialchars(trim($_POST['name']));
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $user_message = htmlspecialchars(trim($_POST['message']));
 
-    if(!empty($nom) && !empty($email) && !empty($user_message)) {
+    if (!empty($nom) && filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($user_message)) {
         $mail = new PHPMailer(true);
 
         try {
@@ -47,7 +47,7 @@ if (isset($_POST['mailform'])) {
             $msg = "Le message n'a pas pu être envoyé. Erreur: {$mail->ErrorInfo}";
         }
     } else {
-        $msg = "Une Erreur est survenue. Veuillez réessayer plus tard.";
+        $msg = "Veuillez remplir tous les champs correctement.";
     }
 }
 
@@ -73,7 +73,7 @@ if (isset($_POST['mailform'])) {
             <nav>
                 <div class="Container">
                     <a href="./index.php" class="logo">
-                        <img src="ressources/logo/logo_dark_full.jpg" alt="Logo">
+                        <img src="ressources/logo/logo_dark_full.webp" alt="Logo">
                     </a>
                     <button class="menuButton" aria-controls="navbar" aria-expanded="false">
                         <span class="sr-only" style="display: none;">Open main menu</span>
@@ -100,7 +100,7 @@ if (isset($_POST['mailform'])) {
             <div class="heroBackground">
                 <div class="blurredBackground"></div>
                 <h1 style="display: none;">D'étoffes et d'Aiguilles</h1>
-                <img src="ressources/logo/logo_fond_noir_transp.png" alt="logo site" class="logoSite" />
+                <img src="ressources/logo/logo_fond_noir_transp.webp" alt="logo site" class="logoSite" />
                 <div class="scrollButton">
                     Scroll Down
                     <div class="arrow"></div>
@@ -131,7 +131,7 @@ if (isset($_POST['mailform'])) {
                         <div class="number">1</div>
                         <div class="caseBoxContent">
                             <h3 class="caseTitle">Création de costumes et cosplay sur-mesure</h3>
-                            <p>Remplir le <a href="#" class="download" target="_blank"
+                            <p>Remplir le <a href="https://forms.gle/bDAoJVdgKuMHEc1EA" class="download" target="_blank"
                                     rel="noopener noreferrer">formulaire</a> avec votre contact et le brouillon de votre
                                 projet pour estimer le devis selon votre budget. Vous pouvez me le renvoyer via le
                                 formulaire de contact ou directement sur les réseaux sociaux.</p>
@@ -187,7 +187,7 @@ if (isset($_POST['mailform'])) {
         <section class="presentation" id="presentation">
             <div class="presentationBoxLeft">
                 <!-- place for the portrait image -->
-                <div class="presentationImage" style="background-image: url('./ressources/images/background/portrait.jpg');">
+                <div class="presentationImage" style="background-image: url('./ressources/images/background/portrait.webp');">
                 </div>
             </div>
             <!-- place for the presentation text -->
@@ -255,7 +255,7 @@ if (isset($_POST['mailform'])) {
         <section class="contact" id="contact">
             <!-- background image added -->
             <div class="contactBackground"
-                style="background-image: url('./ressources/images/background/machine_a_coudre.jpg');"></div>
+                style="background-image: url('./ressources/images/background/machine_a_coudre.webp');"></div>
             <h2 class="contactTitle">
                 CONTACTEZ<br />MOI
             </h2>

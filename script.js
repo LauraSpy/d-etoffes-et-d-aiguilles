@@ -1,21 +1,25 @@
-var _a;
+var _a, _b;
 // FENETRE POPUP COOKIES
 document.addEventListener('DOMContentLoaded', function () {
-    var cookieModal = new window.bootstrap.Modal(document.getElementById('cookieModal'));
+    var cookieModalElement = document.getElementById('cookieModal');
+    var cookieModal = cookieModalElement ? new window.bootstrap.Modal(cookieModalElement) : null;
     var acceptCookiesBtn = document.getElementById('acceptCookies');
-    var closeCookiesBtn = document.getElementById('closeCookies');
-    if (!localStorage.getItem('cookiesAccepted')) {
+    var closeCookiesBtn = document.querySelector('.btn-close');
+    // Afficher la modale si les cookies n'ont pas encore été acceptés
+    if (cookieModal && !localStorage.getItem('cookiesAccepted')) {
         cookieModal.show();
     }
+    // Gestion du bouton "Accepter"
     acceptCookiesBtn === null || acceptCookiesBtn === void 0 ? void 0 : acceptCookiesBtn.addEventListener('click', function () {
         localStorage.setItem('cookiesAccepted', 'true');
-        cookieModal.hide();
-        enableElfsightWidget(); // Fonction pour activer le widget
+        cookieModal === null || cookieModal === void 0 ? void 0 : cookieModal.hide();
+        enableElfsightWidget(); // Activer le widget
     });
+    // Gestion du bouton "Fermer"
     closeCookiesBtn === null || closeCookiesBtn === void 0 ? void 0 : closeCookiesBtn.addEventListener('click', function () {
         localStorage.setItem('cookiesAccepted', 'false');
-        cookieModal.hide();
-        disableElfsightWidget(); // Fonction pour désactiver le widget
+        cookieModal === null || cookieModal === void 0 ? void 0 : cookieModal.hide();
+        disableElfsightWidget(); // Désactiver le widget
     });
     // Vérifiez l'état des cookies au chargement de la page
     if (localStorage.getItem('cookiesAccepted') === 'true') {
@@ -64,59 +68,29 @@ function initHero() {
 document.addEventListener('DOMContentLoaded', initHero);
 var carouselItems = [
     {
-        image: "/ressources/images/Cr\u00E9ation/robeMedievalFantasy.webp",
-        title: "Des Hobbits de la Comté",
-        description: "Tenues médiévales/fantasy, corset et jupe. (Modèle à gauche : instagram @texou_cosplay)"
-    },
-    {
-        image: "/ressources/images/Cr\u00E9ation/shanksJacket.webp",
-        title: "Veste type pirate H/F",
-        description: "Veste de pirate, taille unique, non genré."
-    },
-    {
-        image: "/ressources/images/Cr\u00E9ation/robeBlanche.webp",
-        title: "Robe de chambre victorienne",
-        description: "Type de robe style Crimson Peak, historique, taille unique"
-    },
-    {
-        image: "/ressources/images/Ciri/Ciri_4.webp",
+        image: "/ressources/images/vitrine/ciri.webp",
         title: "Ciri, The Witcher",
         description: "Design original inspiré du personnage de Ciri dans The Witcher"
     },
     {
-        image: "/ressources/images/Cr\u00E9ation/robemedieval.webp",
-        title: "Robe style médiévale",
-        description: "Inspirée de l'univers de The Witcher, style médiéval fantasy, Haut et jupe séparable, Taille XS"
+        image: "/ressources/images/vitrine/dame_blanche.webp",
+        title: "Robe de chambre victorienne",
+        description: "Type de robe style Crimson Peak, historique, taille unique"
     },
     {
-        image: "/ressources/images/Cr\u00E9ation/robeHisto.webp",
-        title: "Robe Historique, 1730",
-        description: "Création originale, robe historique créée à partir de rideaux, entièrement faite main"
-    },
-    {
-        image: "/ressources/images/AC/Elise/eliseFull.webp",
+        image: "/ressources/images/vitrine/elise.webp",
         title: "Robe 18ème, entre la polonaise et l'anglaise",
         description: "Inspiré de la robe de bal d'Elise de la Serre dans Assassin's Creed Unity, Robe à la polonaise mixé à l'Anglaise pour la longueur, et à la Française pour la pièce d'Estomac"
     },
     {
-        image: "/ressources/images/Cr\u00E9ation/elfe.webp",
-        title: "Elfe de la forêt",
-        description: "Tenue originale d'une tunique en lin avec veste et brassards en simili, taille XS"
-    },
-    {
-        image: "/ressources/images/Cr\u00E9ation/sorciere.webp",
-        title: "Sorcière",
-        description: "Tenue originale d'une sorcière, avec son bâton lumineux, taille XS"
-    },
-    {
-        image: "/ressources/images/Cr\u00E9ation/jedi.webp",
-        title: "Costume de Jedi",
-        description: "Tenue et création d'une tenue de Jedi, inspiré des tenues de Star Wars, taille XS à S"
-    },
-    {
-        image: "/ressources/images/Cr\u00E9ation/sith.webp",
+        image: "/ressources/images/vitrine/sith.webp",
         title: "Tenue de Seigneur Sith",
         description: "Tenue originale d'un Sith de l'univers Star Wars, Taille sur mesure, et pièces d'armure en mousse avec leds intégrées"
+    },
+    {
+        image: "/ressources/images/vitrine/yenn.webp",
+        title: "Yennefer, The Witcher",
+        description: "Tenue inspirée du personnage de Yennefer dans The Witcher, élégante et mystérieuse"
     }
 ];
 var currentIndex = 0;
@@ -241,6 +215,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var fileName = document.querySelector('.fileName');
     if (fileName && this.files && this.files[0]) {
         fileName.textContent = this.files[0].name;
+    }
+});
+// Validation des champs de formulaire pour éviter les scripts
+(_b = document.getElementById('contactForm')) === null || _b === void 0 ? void 0 : _b.addEventListener('submit', function (event) {
+    var nameInput = document.getElementById('name');
+    var emailInput = document.getElementById('email');
+    var messageInput = document.getElementById('message');
+    var sanitize = function (value) { return value.replace(/<[^>]*>?/gm, ''); };
+    nameInput.value = sanitize(nameInput.value);
+    emailInput.value = sanitize(emailInput.value);
+    messageInput.value = sanitize(messageInput.value);
+    if (!nameInput.value || !emailInput.value || !messageInput.value) {
+        event.preventDefault();
+        alert('Veuillez remplir tous les champs correctement.');
     }
 });
 // MESSAGE ALERTE (disparaît au bout de 5s)
