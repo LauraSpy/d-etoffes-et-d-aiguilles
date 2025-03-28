@@ -17,8 +17,12 @@
     padding: 0;
 }
 
-.homepage,
-#location {
+.skipLink {
+    position: absolute;
+    top: -500px;
+}
+
+.homepage {
     width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
@@ -326,6 +330,8 @@
     font-size: 12px;
 }
 
+
+
 /*    A L E R T   B O X    */
 
 .message {
@@ -565,6 +571,7 @@
 .carouselTrack {
     display: flex;
     width: max-content;
+    transition: transform 0.5s ease-in-out;
 }
 
 .imageContainer {
@@ -575,6 +582,15 @@
     background-position: center;
     box-shadow: 10px 10px 5px 0px rgba(29, 29, 29, 0.4) inset;
     overflow: hidden;
+}
+
+
+/* Zoomable Image */
+.zoomableImage {
+    cursor: zoom-in;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .image {
@@ -597,6 +613,29 @@
     align-items: center;
     opacity: 0;
     transition: opacity 0.4s ease;
+    text-decoration: none;
+    cursor: zoom-in;
+}
+
+.imageContainer:hover .overlay {
+    opacity: 1;
+}
+
+.overlay .title,
+.overlay .description {
+    color: #F5F5DC;
+    font-family: 'Nightingale';
+    text-align: center;
+}
+
+.overlay .title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.overlay .description {
+    font-size: 1.1rem;
+    padding: 0 10px;
 }
 
 .title {
@@ -613,11 +652,6 @@
     font-size: 1.1rem;
     text-align: center;
     padding: 0 10px;
-}
-
-.description:hover {
-    cursor: pointer;
-    text-decoration: underline;
 }
 
 .imageContainer:hover .overlay {
@@ -686,12 +720,18 @@ textarea {
     outline: none;
 }
 
+label {
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+}
+
 input::placeholder,
 textarea::placeholder {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.3);
     font-family: Calibri;
-    font-size: 14px;
-    text-transform: uppercase;
+    font-style: italic;
+    font-size: 12px;
 }
 
 input:focus,
@@ -700,8 +740,8 @@ textarea:focus {
 }
 
 textarea {
-    resize: vertical;
-    min-height: 30vh;
+    resize: none !important;
+    min-height: 25vh;
 }
 
 .lineGradient {
@@ -816,7 +856,7 @@ textarea {
 .Title {
     margin: auto;
     font-size: 5rem;
-    padding: 50px 200px;
+    /* padding: 5% 15%; */
     font-family: "Bocklin";
 }
 
@@ -875,27 +915,6 @@ textarea {
 }
 
 
-/*    P A G E   L O C A T I O N    */
-
-/*   B U I L D I N G    */
-
-.general {
-    width: 100%;
-    height: 100vh;
-    background-color: #F5F5DC;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.general p {
-    font-family: Calibri;
-    color: #3C2F2F;
-    border: 1px solid #3C2F2F;
-    padding: 2.5%;
-}
-
-
 /* Media queries */
 @media screen and (max-width: 1550px) {
     .contentCreaCarousel {
@@ -950,7 +969,7 @@ textarea {
 
     .Title {
         font-size: 2.5rem;
-        padding: 20px 50px;
+        /* padding: 2% 5%; */
     }
 
     .Navbar ul li a {
@@ -1015,8 +1034,8 @@ textarea {
     }
 
     .Title {
-        font-size: 2.5rem;
-        padding: 20px 50px;
+        font-size: 2.2rem;
+        /* padding: 2% 5%; */
     }
 
     .Navbar ul li {
@@ -1159,22 +1178,12 @@ textarea {
         margin-right: 20%;
     }
 
-    .Title {
-        font-size: 2.5rem;
-        padding: 30px 20px;
-    }
-
     .Navbar ul {
         gap: 0;
     }
 
     .Navbar ul li a {
         width: 120px;
-    }
-
-    .Title {
-        font-size: 2.5rem;
-        padding: 30px 20px;
     }
 
     .leftText {
@@ -1213,6 +1222,10 @@ textarea {
 
     .imageContainer {
         scroll-snap-align: start;
+    }
+
+    .carouselContainer {
+        touch-action: pinch-zoom;
     }
 }
 
@@ -1314,7 +1327,7 @@ textarea {
 
     .Title {
         order: 1;
-        padding: 20px;
+        /* padding: 2%; */
     }
 }
 

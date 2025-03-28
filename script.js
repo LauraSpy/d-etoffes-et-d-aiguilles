@@ -68,14 +68,9 @@ function initHero() {
 document.addEventListener('DOMContentLoaded', initHero);
 var carouselItems = [
     {
-        image: "/ressources/images/vitrine/hobbitwebp",
+        image: "/ressources/images/vitrine/hobbit.webp",
         title: "Des Hobbits de la Comté",
         description: "Tenues médiévales/fantasy, corset et jupe. (Modèle à gauche : instagram @texou_cosplay)"
-    },
-    {
-        image: "/ressources/images/vitrine/shanks.webp",
-        title: "Veste type pirate H/F",
-        description: "Veste de pirate, taille unique, non genré."
     },
     {
         image: "/ressources/images/vitrine/ciri.webp",
@@ -131,7 +126,7 @@ function initCarousel() {
         carouselItems.forEach(function (item, index) {
             var itemElement = document.createElement('div');
             itemElement.className = 'imageContainer';
-            itemElement.innerHTML = "\n                <div class=\"image\" style=\"background-image: url(".concat(item.image, ")\"></div>\n                <div class=\"overlay\">\n                    <h2 class=\"title\">").concat(item.title, "</h2>\n                    <p class=\"description\">").concat(item.description, "</p>\n                </div>\n            ");
+            itemElement.innerHTML = "\n                <div class=\"image\" style=\"background-image: url(".concat(item.image, ")\"></div>\n                <a href=\"").concat(item.image, "\" target=\"_blank\" class=\"overlay zoomableImage\">\n                    <h2 class=\"title\">").concat(item.title, "</h2>\n                    <p class=\"description\">").concat(item.description, "</p>\n                </a>\n            ");
             carouselTrack.appendChild(itemElement);
         });
     }
@@ -170,15 +165,31 @@ function initCarousel() {
         updateCarousel();
     });
 }
+document.addEventListener('DOMContentLoaded', function () {
+    var carouselImages = document.querySelectorAll('.image');
+    carouselImages.forEach(function (image) {
+        image.addEventListener('click', function () {
+            var _a, _b;
+            var backgroundImage = (_b = (_a = image.getAttribute('style')) === null || _a === void 0 ? void 0 : _a.match(/url\(["']?(.*?)["']?\)/)) === null || _b === void 0 ? void 0 : _b[1];
+            if (backgroundImage) {
+                window.open(backgroundImage, '_blank');
+            }
+        });
+    });
+});
 function updateCarousel() {
     var carouselTrack = document.getElementById('carouselTrack');
     var imageContainer = document.querySelector('.imageContainer');
     if (carouselTrack && imageContainer) {
         if (window.innerWidth > 1050) {
             var containerWidth = imageContainer.offsetWidth;
+            // Ajouter une transition pour l'animation
+            carouselTrack.style.transition = 'transform 0.5s ease-in-out';
             carouselTrack.style.transform = "translateX(-".concat(currentIndex * containerWidth, "px)");
         }
         else {
+            // Désactiver la transition pour les petits écrans
+            carouselTrack.style.transition = 'none';
             carouselTrack.style.transform = 'none';
         }
     }
@@ -281,4 +292,44 @@ document.addEventListener('DOMContentLoaded', function () {
     else if (alertMessage) {
         alertMessage.style.display = 'none';
     }
+});
+document.addEventListener('DOMContentLoaded', function () {
+    var navbarLinks = document.querySelectorAll('.navbarLink');
+    navbarLinks.forEach(function (link) {
+        link.addEventListener('click', function (event) {
+            var _a;
+            event.preventDefault();
+            var targetId = (_a = link.getAttribute('href')) === null || _a === void 0 ? void 0 : _a.substring(1);
+            var targetElement = document.getElementById(targetId || '');
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    var allLinks = document.querySelectorAll('a[href^="#"], a[href^="./"]');
+    allLinks.forEach(function (link) {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            var href = link.getAttribute('href');
+            if (href && href.indexOf('#') === 0) {
+                // Gestion des liens d'ancrage
+                var targetId = href.substring(1);
+                var targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            else if (href && href.indexOf('./') === 0) {
+                // Gestion des liens vers d'autres pages
+                var url = new URL(href, window.location.origin);
+                window.location.href = url.href;
+            }
+        });
+    });
 });
