@@ -28,8 +28,8 @@ if (isset($_POST['mailform'])) {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port       = 465;
 
-            $mail->setFrom('noreply@d-etoffes-et-d-aiguilles.fr', 'D\'Etoffes et d\'Aiguilles');
-            $mail->addAddress('noreply@d-etoffes-et-d-aiguilles.fr');
+            $mail->setFrom(SMTP_USERNAME, 'D\'Etoffes et d\'Aiguilles');
+            $mail->addAddress(SMTP_USERNAME);
 
             $mail->isHTML(true);
             $mail->Subject = "CONTACT - d-etoffes-et-d-aiguilles.fr";
@@ -273,7 +273,8 @@ if (isset($_POST['mailform'])) {
                         <div class="formGroup">
                             <label for="message" class="sr-only">Message</label>
                             <textarea id="message" name="message" placeholder="laissez-moi un message ici..."
-                                title="Ne renseignez jamais de numéros de téléphone" required aria-required="true" aria-label="Message" tabindex="0"></textarea>
+                                title="Ne renseignez jamais de numéros de téléphone" required aria-required="true" aria-label="Message" tabindex="0" maxlength="1000"></textarea>
+                            <div id="charCounter" style="text-align: right; font-size: 0.9rem; color: #6c757d;">0 / 1000 caractères</div>
                         </div>
                         <div class="formGroup">
                             <button type="submit" class="submitButton" name="mailform" tabindex="0">Envoyer</button>

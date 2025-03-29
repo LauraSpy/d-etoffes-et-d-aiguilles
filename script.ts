@@ -327,6 +327,20 @@ document.getElementById('contactForm')?.addEventListener('submit', (event) => {
     }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+    const charCounter = document.getElementById('charCounter');
+
+    if (messageInput && charCounter) {
+        const maxLength = 1000;
+
+        messageInput.addEventListener('input', () => {
+            const typed = messageInput.value.length;
+            charCounter.textContent = `${typed} / ${maxLength} caractères`;
+        });
+    }
+});
+
 
 
 // MESSAGE ALERTE (disparaît au bout de 5s)

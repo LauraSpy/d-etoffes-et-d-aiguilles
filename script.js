@@ -272,6 +272,17 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Veuillez remplir tous les champs correctement.');
     }
 });
+document.addEventListener('DOMContentLoaded', function () {
+    var messageInput = document.getElementById('message');
+    var charCounter = document.getElementById('charCounter');
+    if (messageInput && charCounter) {
+        var maxLength_1 = 1000;
+        messageInput.addEventListener('input', function () {
+            var typed = messageInput.value.length;
+            charCounter.textContent = "".concat(typed, " / ").concat(maxLength_1, " caract\u00E8res");
+        });
+    }
+});
 // MESSAGE ALERTE (disparaît au bout de 5s)
 document.addEventListener('DOMContentLoaded', function () {
     var alertMessage = document.querySelector('.message');
