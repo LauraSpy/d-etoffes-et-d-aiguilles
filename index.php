@@ -264,17 +264,17 @@ if (isset($_POST['mailform'])) {
                     <form id="contactForm" class="contactForm" name="contact" method="POST" action="">
                         <div class="formGroup">
                             <label for="name" class="sr-only">Nom Prénom / Pseudo</label>
-                            <input autocomplete="on" type="text" id="name" name="name" placeholder="..." required aria-required="true" aria-label="Nom Prénom / Pseudo" tabindex="0" />
+                            <input autocomplete="on" type="text" id="name" name="name" placeholder="" required aria-required="true" aria-label="Nom Prénom / Pseudo" tabindex="0" />
                         </div>
                         <div class="formGroup">
                             <label for="email" class="sr-only">Mail*</label>
-                            <input autocomplete="on" type="email" id="email" name="email" placeholder="..." required aria-required="true" aria-label="Mail" tabindex="0" />
+                            <input autocomplete="on" type="email" id="email" name="email" placeholder="" required aria-required="true" aria-label="Mail" tabindex="0" />
                         </div>
                         <div class="formGroup">
                             <label for="message" class="sr-only">Message</label>
                             <textarea id="message" name="message" placeholder="laissez-moi un message ici..."
                                 title="Ne renseignez jamais de numéros de téléphone" required aria-required="true" aria-label="Message" tabindex="0" maxlength="1000"></textarea>
-                            <div id="charCounter" style="text-align: right; font-size: 0.9rem; color: #6c757d;">0 / 1000 caractères</div>
+                            <div id="charCounter" style="text-align: right; font-size: 0.6rem; color: #6c757d;">0 / 1000 caractères</div>
                         </div>
                         <div class="formGroup">
                             <button type="submit" class="submitButton" name="mailform" tabindex="0">Envoyer</button>

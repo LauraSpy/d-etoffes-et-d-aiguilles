@@ -330,7 +330,11 @@
     font-size: 12px;
 }
 
-
+#contactForm input,
+#contactForm textarea {
+    border: 1px solid #3c2f2f12;
+    border-radius: 5px;
+}
 
 /*    A L E R T   B O X    */
 
